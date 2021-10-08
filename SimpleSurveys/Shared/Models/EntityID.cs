@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleSurveys.Shared.Models
 {
-    public abstract class Entity
+    public abstract class EntityID
     {
         public int ID { get; set; }
     }
