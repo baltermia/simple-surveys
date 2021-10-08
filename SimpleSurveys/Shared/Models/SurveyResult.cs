@@ -6,9 +6,8 @@ namespace SimpleSurveys.Shared.Models
     /// <summary>
     /// Holds the results data of a survey
     /// </summary>
-    public class SurveyResult : IEntity
+    public class SurveyResult : Entity
     {
-        public int ID { get; set; }
         public int SurveyID { get; set; }
 
         /// <summary>

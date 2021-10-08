@@ -5,9 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SimpleSurveys.Shared.Models
 {
-    public class Survey : IEntity
+    public class Survey : Entity
     {
-        public int ID { get; set; }
         public int SurveyID { get; set; }
 
         /// <summary>

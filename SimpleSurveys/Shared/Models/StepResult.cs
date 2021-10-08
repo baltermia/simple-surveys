@@ -7,9 +7,8 @@ namespace SimpleSurveys.Shared.Models
     /// <summary>
     /// Holds the results data of a step
     /// </summary>
-    public abstract class StepResult : IEntity
+    public abstract class StepResult : Entity
     {
-        public int ID { get; set; }
         public int StepID { get; set; }
 
         public Step Step { get; set; }

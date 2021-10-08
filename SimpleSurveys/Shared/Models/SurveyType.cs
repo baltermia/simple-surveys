@@ -2,10 +2,8 @@
 
 namespace SimpleSurveys.Shared.Models
 {
-    public class SurveyType : IEntity
+    public class SurveyType : Entity
     {
-        public int ID { get; set; }
-
         [Required]
         public string Name { get; set; }
     }
