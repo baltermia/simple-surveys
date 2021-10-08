@@ -7,7 +7,7 @@ namespace SimpleSurveys.Shared.Models
     /// <summary>
     /// The main Step class
     /// </summary>
-    public abstract class Step : Entity
+    public abstract class Step : EntityID
     {
         public int SurveyID { get; set; }
 
