@@ -18,30 +18,24 @@ namespace SimpleSurveys.Shared.Models
         /// <summary>
         /// Displayed description of the survey
         /// </summary>
-        [Required, Editable(false, AllowInitialValue = true)]
-        public string Description { get; set; }
+        public string Description { get; set; } = null;
 
         /// <summary>
-        /// DateTime when 
+        /// When the Survey was created
         /// </summary>
-        [Required, Column(TypeName = "datetime")]
-        public DateTime Created { get; set; }
+        [Column(TypeName = "datetime"), Editable(false, AllowInitialValue = true)]
+        public DateTime Created { get; set; } = DateTime.Now;
 
         /// <summary>
-        /// What type this survey is
+        /// When the survey got edited the last time (not including initialization)
         /// </summary>
-        [Required]
-        public SurveyType SurveyType { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? Updated { get; set; } = null;
 
         /// <summary>
-        /// How many times the survey has been completed (probably the same as entries in Results)
+        /// Whether the Survey is open (meaning it can still be answered)
         /// </summary>
-        public int TimesCompleted { get; set; } = 0;
-
-        /// <summary>
-        /// Whether the Survey is closed (meaning it can't be answered anymore)
-        /// </summary>
-        public bool Closed { get; set; } = false;
+        public bool Open { get; set; } = true;
 
         /// <summary>
         /// Last time the survey got closed
@@ -59,6 +53,6 @@ namespace SimpleSurveys.Shared.Models
         public bool Public { get; set; } = true;
 
         public ICollection<Step> Steps { get; set; }
-        public ICollection<SurveyResult> Results { get; set; }
+        public ICollection<SurveyResult> SurveyResults { get; set; }
     }
 }
