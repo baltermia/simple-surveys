@@ -6,15 +6,15 @@ namespace SimpleSurveys.Server.Repositories
     {
         private readonly SimpleSurveysContext context;
 
-        private IRepository<Survey>     _survey;
-        private IRepository<Step>       _step;
-        private IRepository<SurveyType> _surveyType;
-        private IRepository<SurveyType> _stepType;
+        private IRepositoryBase<Survey>     _survey;
+        private IRepositoryBase<Step>       _step;
+        private IRepositoryBase<SurveyType> _surveyType;
+        private IRepositoryBase<SurveyType> _stepType;
 
-        public IRepository<Survey>      Survey      =>  CreateIfNull(ref _survey);
-        public IRepository<Step>        Step        =>  CreateIfNull(ref _step);
-        public IRepository<SurveyType>  SurveyType  =>  CreateIfNull(ref _surveyType);
-        public IRepository<SurveyType>  StepType    =>  CreateIfNull(ref _stepType);
+        public IRepositoryBase<Survey>      Survey      =>  CreateBase(ref _survey);
+        public IRepositoryBase<Step>        Step        =>  CreateBase(ref _step);
+        public IRepositoryBase<SurveyType>  SurveyType  =>  CreateBase(ref _surveyType);
+        public IRepositoryBase<SurveyType>  StepType    =>  CreateBase(ref _stepType);
 
         public RepositoryWrapper(SimpleSurveysContext context)
         {
@@ -23,6 +23,6 @@ namespace SimpleSurveys.Server.Repositories
 
         public void Save() => context.SaveChanges();
 
-        private IRepository<T> CreateIfNull<T>(ref IRepository<T> repository) where T : class => repository ??= new Repository<T>(context);
+        private IRepositoryBase<T> CreateBase<T>(ref IRepositoryBase<T> repository) where T : class => repository ??= new RepositoryBase<T>(context);
     }
 }

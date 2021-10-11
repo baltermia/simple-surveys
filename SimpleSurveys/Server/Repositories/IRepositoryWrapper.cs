@@ -4,10 +4,10 @@ namespace SimpleSurveys.Server.Repositories
 {
     public interface IRepositoryWrapper
     {
-        IRepository<Survey> Survey { get; }
-        IRepository<Step> Step { get; }
-        IRepository<SurveyType> StepType{ get; }
-        IRepository<SurveyType> SurveyType { get; }
+        IRepositoryBase<Survey> Survey { get; }
+        IRepositoryBase<Step> Step { get; }
+        IRepositoryBase<SurveyType> StepType{ get; }
+        IRepositoryBase<SurveyType> SurveyType { get; }
         void Save();
     }
 }
