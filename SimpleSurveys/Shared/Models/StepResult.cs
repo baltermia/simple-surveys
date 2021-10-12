@@ -10,8 +10,10 @@ namespace SimpleSurveys.Shared.Models
     public abstract class StepResult : EntityID
     {
         public int StepID { get; set; }
+        public int SurveyResultID { get; set; }
 
         public Step Step { get; set; }
+        public SurveyResult SurveyResult { get; set; }
     }
 
     public class RadioResult : StepResult
@@ -35,7 +37,7 @@ namespace SimpleSurveys.Shared.Models
     public class CheckResult : StepResult
     {
         [Required]
-        public IEnumerable<string> Items { get; set; }
+        public ICollection<StepResult_Value> StepResult_Values { get; set; }
     }
 
     public class YesNoResult : StepResult
@@ -52,6 +54,7 @@ namespace SimpleSurveys.Shared.Models
 
     public class NumberResult : StepResult
     {
+        [Required]
         public int Value { get; set; }
     }
 
@@ -63,6 +66,7 @@ namespace SimpleSurveys.Shared.Models
 
     public class DropDownResult : StepResult
     {
-        public IEnumerable<string> Items { get; set; }
+        [Required]
+        public ICollection<StepResult_Value> StepResult_Values { get; set; }
     }
 }
