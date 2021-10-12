@@ -48,6 +48,11 @@ namespace SimpleSurveys.Shared.Models
         public string Password = null;
 
         /// <summary>
+        /// The maximum amount of submissions of this survey. The survey is closed when this is reached
+        /// </summary>
+        public int? MaxSubmissions = null;
+
+        /// <summary>
         /// Whether the results of the survey are public
         /// </summary>
         public bool Public { get; set; } = true;
