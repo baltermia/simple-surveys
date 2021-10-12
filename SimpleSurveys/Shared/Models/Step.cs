@@ -26,7 +26,7 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public class Radio : Step
     {
-        public IEnumerable<string> Items { get; set; }
+        public ICollection<Step_Value> Step_Values { get; set; }
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public class Check : Step
     {
-        public IEnumerable<string> Items { get; set; }
+        public ICollection<Step_Value> Step_Values { get; set; }
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public class DropDown : Step
     {
-        public IEnumerable<string> Items { get; set; }
+        public ICollection<Step_Value> Step_Values{ get; set; }
         public int? Default { get; set; } = null;
         public string Placeholder { get; set; } = null;
         public bool MultiSelect { get; set; } = false;
