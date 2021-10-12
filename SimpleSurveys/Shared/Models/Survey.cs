@@ -7,8 +7,6 @@ namespace SimpleSurveys.Shared.Models
 {
     public class Survey : EntityID
     {
-        public int SurveyID { get; set; }
-
         /// <summary>
         /// Displayed name of the survey
         /// </summary>
