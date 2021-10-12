@@ -6,8 +6,11 @@ namespace SimpleSurveys.Server.Repositories
     {
         IRepositoryBase<Survey> Survey { get; }
         IRepositoryBase<Step> Step { get; }
-        IRepositoryBase<SurveyType> StepType{ get; }
-        IRepositoryBase<SurveyType> SurveyType { get; }
+        IRepositoryBase<SurveyResult> SurveyResult { get; }
+        IRepositoryBase<StepResult> StepResult { get; }
+        IRepositoryBase<Step_Value> Step_Value { get; }
+        IRepositoryBase<StepResult_Value> StepResult_Value { get; }
+        IRepositoryBase<Value> Value { get; }
         void Save();
     }
 }
