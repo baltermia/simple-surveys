@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SimpleSurveys.Shared.Models
@@ -12,8 +10,6 @@ namespace SimpleSurveys.Shared.Models
 
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Step> Steps { get; set; }
-        public DbSet<SurveyType> StepTyes { get; set; }
-        public DbSet<SurveyType> SurveyTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,11 +18,9 @@ namespace SimpleSurveys.Shared.Models
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
-
-            // Converts a string containing ';' to a list
-            ValueConverter converter = new ValueConverter<IEnumerable<string>, string>(v => string.Join(";", v), v => v.Split(new[] { ';' }));
-
+            
             // Step
+
             modelBuilder.Entity<Step>()
                 .HasDiscriminator<string>("Discriminator")
                 .HasValue<Radio>("Radio")
@@ -41,10 +35,6 @@ namespace SimpleSurveys.Shared.Models
             modelBuilder.Entity<Step>()
                 .Property("Discriminator")
                 .HasMaxLength(100);
-
-            modelBuilder.Entity<Radio>().Property(nameof(Radio.Items)).HasConversion(converter);
-            modelBuilder.Entity<Check>().Property(nameof(Check.Items)).HasConversion(converter);
-            modelBuilder.Entity<DropDown>().Property(nameof(DropDown.Items)).HasConversion(converter);
 
             // StepResult 
 
@@ -62,9 +52,6 @@ namespace SimpleSurveys.Shared.Models
             modelBuilder.Entity<StepResult>()
                 .Property("Discriminator")
                 .HasMaxLength(100);
-
-            modelBuilder.Entity<CheckResult>().Property(nameof(CheckResult.Items)).HasConversion(converter);
-            modelBuilder.Entity<DropDownResult>().Property(nameof(DropDownResult.Items)).HasConversion(converter);
         }
     }
 }
