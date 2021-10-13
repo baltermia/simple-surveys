@@ -20,7 +20,7 @@ namespace SimpleSurveys.Shared.Models
         /// </summary>
         public string Name { get; set; } = null;
 
-        public ICollection<StepResult> StepResults { get; set; }
+        public virtual ICollection<StepResult> StepResults { get; set; }
 
         public Survey Survey { get; set; }
     }

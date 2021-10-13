@@ -16,7 +16,7 @@ namespace SimpleSurveys.Shared.Models
 
         public bool Required { get; set; } = false;
 
-        public ICollection<StepResult> Results { get; set; }
+        public virtual ICollection<StepResult> Results { get; set; }
 
         public Survey Survey { get; set; }
     }
@@ -26,7 +26,7 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public class Radio : Step
     {
-        public ICollection<Value> Values { get; set; }
+        public virtual ICollection<Value> Values { get; set; }
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public class Check : Step
     {
-        public ICollection<Value> Values { get; set; }
+        public virtual ICollection<Value> Values { get; set; }
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public class DropDown : Step
     {
-        public ICollection<Value> Values{ get; set; }
+        public virtual ICollection<Value> Values{ get; set; }
         public int? Default { get; set; } = null;
         public string Placeholder { get; set; } = null;
         public bool MultiSelect { get; set; } = false;

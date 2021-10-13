@@ -55,7 +55,7 @@ namespace SimpleSurveys.Shared.Models
         /// </summary>
         public bool Public { get; set; } = true;
 
-        public ICollection<Step> Steps { get; set; }
-        public ICollection<SurveyResult> SurveyResults { get; set; }
+        public virtual ICollection<Step> Steps { get; set; }
+        public virtual ICollection<SurveyResult> SurveyResults { get; set; }
     }
 }
