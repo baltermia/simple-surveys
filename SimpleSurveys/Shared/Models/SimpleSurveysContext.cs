@@ -12,8 +12,6 @@ namespace SimpleSurveys.Shared.Models
         public DbSet<Step> Steps { get; set; }
         public DbSet<SurveyResult> SurveyResults { get; set; }
         public DbSet<StepResult> StepResults { get; set; }
-        public DbSet<Step_Value> Step_Values { get; set; }
-        public DbSet<StepResult_Value> StepResult_Values { get; set; }
         public DbSet<Value> Values { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
