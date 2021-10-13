@@ -375,11 +375,10 @@ namespace SimpleSurveys.Shared.Migrations
                 {
                     b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("String_Value");
+                    b.Property<int>("ValueID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("ValueID");
 
                     b.HasDiscriminator().HasValue("RadioResult");
                 });
@@ -415,6 +414,7 @@ namespace SimpleSurveys.Shared.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("String_Value");
 
@@ -548,6 +548,17 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("Survey");
                 });
 
+            modelBuilder.Entity("SimpleSurveys.Shared.Models.RadioResult", b =>
+                {
+                    b.HasOne("SimpleSurveys.Shared.Models.Value", "Value")
+                        .WithMany("RadioResults")
+                        .HasForeignKey("ValueID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Value");
+                });
+
             modelBuilder.Entity("SimpleSurveys.Shared.Models.Step", b =>
                 {
                     b.Navigation("Results");
@@ -563,6 +574,11 @@ namespace SimpleSurveys.Shared.Migrations
             modelBuilder.Entity("SimpleSurveys.Shared.Models.SurveyResult", b =>
                 {
                     b.Navigation("StepResults");
+                });
+
+            modelBuilder.Entity("SimpleSurveys.Shared.Models.Value", b =>
+                {
+                    b.Navigation("RadioResults");
                 });
 #pragma warning restore 612, 618
         }

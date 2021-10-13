@@ -174,6 +174,7 @@ namespace SimpleSurveys.Shared.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DateTime_Value = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Int_Value = table.Column<int>(type: "int", nullable: true),
+                    ValueID = table.Column<int>(type: "int", nullable: true),
                     String_Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Bool_Value = table.Column<bool>(type: "bit", nullable: true)
                 },
@@ -190,6 +191,12 @@ namespace SimpleSurveys.Shared.Migrations
                         name: "FK_StepResults_SurveyResults_SurveyResultID",
                         column: x => x.SurveyResultID,
                         principalTable: "SurveyResults",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StepResults_Values_ValueID",
+                        column: x => x.ValueID,
+                        principalTable: "Values",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -278,6 +285,11 @@ namespace SimpleSurveys.Shared.Migrations
                 column: "SurveyResultID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_StepResults_ValueID",
+                table: "StepResults",
+                column: "ValueID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Steps_SurveyID",
                 table: "Steps",
                 column: "SurveyID");
@@ -309,13 +321,13 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "StepResults");
 
             migrationBuilder.DropTable(
-                name: "Values");
-
-            migrationBuilder.DropTable(
                 name: "Steps");
 
             migrationBuilder.DropTable(
                 name: "SurveyResults");
+
+            migrationBuilder.DropTable(
+                name: "Values");
 
             migrationBuilder.DropTable(
                 name: "Surveys");
