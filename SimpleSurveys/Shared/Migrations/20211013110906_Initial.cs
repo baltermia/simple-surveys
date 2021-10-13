@@ -53,7 +53,7 @@ namespace SimpleSurveys.Shared.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Placeholder = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date_Default = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Type = table.Column<int>(type: "int", nullable: true),
+                    DateType = table.Column<int>(type: "int", nullable: true),
                     Default = table.Column<int>(type: "int", nullable: true),
                     MultiSelect = table.Column<bool>(type: "bit", nullable: true),
                     Min = table.Column<int>(type: "int", nullable: true),

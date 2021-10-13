@@ -10,7 +10,7 @@ using SimpleSurveys.Shared.Models;
 namespace SimpleSurveys.Shared.Migrations
 {
     [DbContext(typeof(SimpleSurveysContext))]
-    [Migration("20211013094950_Initial")]
+    [Migration("20211013110906_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,7 +255,8 @@ namespace SimpleSurveys.Shared.Migrations
                         .HasColumnName("Placeholder");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("DateType");
 
                     b.HasDiscriminator().HasValue("Date");
                 });

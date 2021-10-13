@@ -253,7 +253,8 @@ namespace SimpleSurveys.Shared.Migrations
                         .HasColumnName("Placeholder");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("DateType");
 
                     b.HasDiscriminator().HasValue("Date");
                 });

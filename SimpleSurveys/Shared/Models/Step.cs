@@ -16,17 +16,17 @@ namespace SimpleSurveys.Shared.Models
 
         public bool Required { get; set; } = false;
 
-        public virtual ICollection<StepResult> Results { get; set; }
+        public virtual ICollection<StepResult> Results { get; set; } = new HashSet<StepResult>();
 
         public Survey Survey { get; set; }
     }
-
+    
     /// <summary>
     /// A Step that can be answered using RadioBoxes
     /// </summary>
     public class Radio : Step
     {
-        public virtual ICollection<Value> Values { get; set; }
+        public virtual ICollection<Value> Values { get; set; } = new HashSet<Value>();
     }
 
     /// <summary>

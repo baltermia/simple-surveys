@@ -32,6 +32,8 @@ namespace SimpleSurveys.Shared.Models
             modelBuilder.Entity<Number>().Property(e => e.Default).HasColumnName("Default");
             modelBuilder.Entity<DropDown>().Property(e => e.Default).HasColumnName("Default");
 
+            modelBuilder.Entity<Date>().Property(e => e.Type).HasColumnName("DateType");
+
             // Step
 
             modelBuilder.Entity<Step>()
