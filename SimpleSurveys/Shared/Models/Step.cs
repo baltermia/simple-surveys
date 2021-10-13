@@ -43,7 +43,7 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public class Text : Step
     {
-        public string Placeholder = null;
+        public string Placeholder { get; set; } = null;
     }
 
     /// <summary>
