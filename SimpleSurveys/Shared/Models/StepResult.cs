@@ -37,7 +37,7 @@ namespace SimpleSurveys.Shared.Models
     public class CheckResult : StepResult
     {
         [Required]
-        public ICollection<StepResult_Value> StepResult_Values { get; set; }
+        public ICollection<Value> Values { get; set; }
     }
 
     public class YesNoResult : StepResult
@@ -67,6 +67,6 @@ namespace SimpleSurveys.Shared.Models
     public class DropDownResult : StepResult
     {
         [Required]
-        public ICollection<StepResult_Value> StepResult_Values { get; set; }
+        public ICollection<Value> Values { get; set; }
     }
 }
