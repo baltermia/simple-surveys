@@ -19,7 +19,7 @@ namespace SimpleSurveys.Shared.Models
     public class RadioResult : StepResult
     {
         [Required]
-        public string Answer { get; set; }
+        public string Value { get; set; }
     }
 
     public class RangeResult : StepResult
@@ -31,7 +31,7 @@ namespace SimpleSurveys.Shared.Models
     public class TextResult : StepResult
     {
         [Required]
-        public string Answer { get; set; }
+        public string Value { get; set; }
     }
 
     public class CheckResult : StepResult
@@ -43,13 +43,13 @@ namespace SimpleSurveys.Shared.Models
     public class YesNoResult : StepResult
     {
         [Required]
-        public bool Result { get; set; }
+        public bool Value { get; set; }
     }
 
     public class DateResult : StepResult
     {
         [Required]
-        public DateTime DateTime { get; set; }
+        public DateTime Value { get; set; }
     }
 
     public class NumberResult : StepResult
@@ -61,7 +61,7 @@ namespace SimpleSurveys.Shared.Models
     public class RateResult : StepResult
     {
         [Required]
-        public string Answer { get; set; }
+        public string Value { get; set; }
     }
 
     public class DropDownResult : StepResult
