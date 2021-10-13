@@ -14,5 +14,6 @@ namespace SimpleSurveys.Shared.Models
 
         public virtual ICollection<CheckResult> CheckResults { get; set; }
         public virtual ICollection<DropDownResult> DropDownResults { get; set; }
+        public virtual ICollection<RadioResult> RadioResults { get; set; }
     }
 }
