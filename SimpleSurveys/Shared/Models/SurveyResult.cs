@@ -13,7 +13,7 @@ namespace SimpleSurveys.Shared.Models
         /// <summary>
         /// DateTime when the survey got submitted (default value is DateTime.Now)
         /// </summary>
-        public DateTime Submitted { get; set; } = DateTime.Now;
+        public virtual DateTime Submitted { get; set; } = DateTime.Now;
 
         /// <summary>
         /// The name of the submitter (optional at the start of survey)
@@ -22,6 +22,6 @@ namespace SimpleSurveys.Shared.Models
 
         public virtual ICollection<StepResult> StepResults { get; set; }
 
-        public Survey Survey { get; set; }
+        public virtual Survey Survey { get; set; }
     }
 }

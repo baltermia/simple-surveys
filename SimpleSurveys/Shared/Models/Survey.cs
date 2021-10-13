@@ -22,13 +22,13 @@ namespace SimpleSurveys.Shared.Models
         /// When the Survey was created
         /// </summary>
         [Column(TypeName = "datetime"), Editable(false, AllowInitialValue = true)]
-        public DateTime Created { get; set; } = DateTime.Now;
+        public virtual DateTime Created { get; set; } = DateTime.Now;
 
         /// <summary>
         /// When the survey got edited the last time (not including initialization)
         /// </summary>
         [Column(TypeName = "datetime")]
-        public DateTime? Updated { get; set; } = null;
+        public virtual DateTime? Updated { get; set; } = null;
 
         /// <summary>
         /// Whether the Survey is open (meaning it can still be answered)
@@ -38,7 +38,7 @@ namespace SimpleSurveys.Shared.Models
         /// <summary>
         /// Last time the survey got closed
         /// </summary>
-        public DateTime? ClosedSince { get; set; } = null;
+        public virtual DateTime? ClosedSince { get; set; } = null;
 
         /// <summary>
         /// Password which is needed to make changes after creating the survey and access the results data
