@@ -23,5 +23,10 @@ namespace SimpleSurveys.Shared.Models
         public virtual ICollection<StepResult> StepResults { get; set; }
 
         public virtual Survey Survey { get; set; }
+
+        public SurveyResult()
+        {
+            StepResults = new HashSet<StepResult>();
+        }
     }
 }

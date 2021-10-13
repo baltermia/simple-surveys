@@ -63,6 +63,11 @@ namespace SimpleSurveys.Shared.Models
         /// </summary>
         [Required]
         public virtual ICollection<Value> Values { get; set; }
+
+        public CheckResult()
+        {
+            Values = new HashSet<Value>();
+        }
     }
 
     /// <summary>
@@ -123,5 +128,10 @@ namespace SimpleSurveys.Shared.Models
         /// </summary>
         [Required]
         public virtual ICollection<Value> Values { get; set; }
+
+        public DropDownResult()
+        {
+            Values = new HashSet<Value>();
+        }
     }
 }

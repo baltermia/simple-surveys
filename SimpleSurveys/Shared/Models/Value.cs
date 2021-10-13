@@ -15,5 +15,15 @@ namespace SimpleSurveys.Shared.Models
         public virtual ICollection<CheckResult> CheckResults { get; set; }
         public virtual ICollection<DropDownResult> DropDownResults { get; set; }
         public virtual ICollection<RadioResult> RadioResults { get; set; }
+
+        public Value()
+        {
+            Radios = new HashSet<Radio>();
+            Checks = new HashSet<Check>();
+            DropDowns = new HashSet<DropDown>();
+            CheckResults = new HashSet<CheckResult>();
+            DropDownResults = new HashSet<DropDownResult>();
+            RadioResults = new HashSet<RadioResult>();
+        }
     }
 }

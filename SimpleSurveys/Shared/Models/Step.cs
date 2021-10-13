@@ -39,6 +39,11 @@ namespace SimpleSurveys.Shared.Models
         /// The items that can be selected in the radiobox list
         /// </summary>
         public virtual ICollection<Value> Values { get; set; } = new HashSet<Value>();
+
+        public Radio()
+        {
+            Values = new HashSet<Value>();
+        }
     }
 
     /// <summary>
@@ -77,6 +82,11 @@ namespace SimpleSurveys.Shared.Models
         /// The items that can be selected in the checkbox list
         /// </summary>
         public virtual ICollection<Value> Values { get; set; }
+
+        public Check()
+        {
+            Values = new HashSet<Value>();
+        }
     }
 
     /// <summary>
@@ -157,6 +167,11 @@ namespace SimpleSurveys.Shared.Models
         /// Whether multiple items in the dropdown can be selected
         /// </summary>
         public bool MultiSelect { get; set; } = false;
+
+        public DropDown()
+        {
+            Values = new HashSet<Value>();
+        }
     }
 
     /// <summary>
