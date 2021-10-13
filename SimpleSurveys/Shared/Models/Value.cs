@@ -8,7 +8,11 @@ namespace SimpleSurveys.Shared.Models
         [Required]
         public string Text { get; set; }
 
-        public virtual ICollection<Step> Steps { get; set; }
-        public virtual ICollection<StepResult> StepResults { get; set; }
+        public virtual ICollection<Radio> Radios { get; set; }
+        public virtual ICollection<Check> Checks { get; set; }
+        public virtual ICollection<DropDown> DropDowns { get; set; }
+
+        public virtual ICollection<CheckResult> CheckResults { get; set; }
+        public virtual ICollection<DropDownResult> DropDownResults { get; set; }
     }
 }
