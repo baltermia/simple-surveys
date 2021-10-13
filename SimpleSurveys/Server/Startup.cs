@@ -35,6 +35,16 @@ namespace SimpleSurveys.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Migrate and create database
+            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                // Gets the context
+                SimpleSurveysContext context = serviceScope.ServiceProvider.GetRequiredService<SimpleSurveysContext>();
+
+                // Execute Migrations
+                context.Database.Migrate();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
