@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleSurveys.Shared.Models;
 
 namespace SimpleSurveys.Shared.Migrations
 {
     [DbContext(typeof(SimpleSurveysContext))]
-    partial class SimpleSurveysContextModelSnapshot : ModelSnapshot
+    [Migration("20211013062750_FixSurveyID")]
+    partial class FixSurveyID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
