@@ -53,8 +53,6 @@ namespace SimpleSurveys.Shared.Models
 
             // StepResult subclasses
 
-            modelBuilder.Entity<RadioResult>().Property(e => e.ValueID).HasColumnName("Value_Value");
-
             modelBuilder.Entity<TextResult>().Property(e => e.Value).HasColumnName("String_Value");
             modelBuilder.Entity<RateResult>().Property(e => e.Value).HasColumnName("String_Value");
 
