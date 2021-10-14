@@ -10,7 +10,7 @@ using SimpleSurveys.Shared.Models;
 namespace SimpleSurveys.Shared.Migrations
 {
     [DbContext(typeof(SimpleSurveysContext))]
-    [Migration("20211013130412_Initial")]
+    [Migration("20211014140655_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace SimpleSurveys.Shared.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CheckResultValue", b =>
