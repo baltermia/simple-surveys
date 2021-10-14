@@ -27,12 +27,12 @@ namespace SimpleSurveys.Server.Repositories
 
         public IQueryable<T> FindAll()
         {
-            return context.Set<T>().AsNoTracking();
+            return context.Set<T>();
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return context.Set<T>().Where(expression).AsNoTracking();
+            return context.Set<T>().Where(expression);
         }
 
         public void Update(T entity)
