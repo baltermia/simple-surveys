@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SimpleSurveys.Shared.Models;
+using SimpleSurveys.Shared.Configuration;
 
 namespace SimpleSurveys.Shared.Migrations
 {

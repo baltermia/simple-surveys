@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SimpleSurveys.Shared.Models;
+using SimpleSurveys.Shared.Configuration;
 
 namespace SimpleSurveys.Shared.Migrations
 {
     [DbContext(typeof(SimpleSurveysContext))]
-    [Migration("20211014140655_Initial")]
+    [Migration("20211022081153_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
