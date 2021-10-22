@@ -5,6 +5,7 @@ using SimpleSurveys.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SimpleSurveys.Server.Controllers
 {
@@ -20,11 +21,11 @@ namespace SimpleSurveys.Server.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Survey>> Get()
+        public async Task<ActionResult<IEnumerable<Survey>>> Get()
         {
             try
             {
-                return Ok(wrapper.Survey.FindAll());
+                return Ok(await wrapper.Survey.FindAllAsync());
             }
             catch
             {
@@ -33,11 +34,11 @@ namespace SimpleSurveys.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Survey> Get(long id)
+        public async Task<ActionResult<Survey>> Get(int id)
         {
             try
             {
-                Survey survey = GetById(id);
+                Survey survey = await wrapper.Survey.FindByIDAsync(id);
 
                 if (survey == default(Survey))
                 {
@@ -53,12 +54,13 @@ namespace SimpleSurveys.Server.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Survey> Create(Survey survey)
+        public async Task<ActionResult<Survey>> Create(Survey survey)
         {
             try
             {
                 Survey created = wrapper.Survey.Create(survey);
-                wrapper.Save();
+
+                await wrapper.SaveAsync();
 
                 return CreatedAtAction(nameof(Get), new { id = created.ID }, created);
             }
@@ -69,7 +71,7 @@ namespace SimpleSurveys.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(long id, Survey survey)
+        public async Task<ActionResult> Update(int id, Survey survey)
         {
             if (id != survey?.ID)
             {
@@ -78,13 +80,14 @@ namespace SimpleSurveys.Server.Controllers
 
             try
             {
-                if (GetById(id) == default(Survey))
+                if (await wrapper.Survey.FindByIDAsync(id) == default(Survey))
                 {
                     return NotFound(id);
                 }
 
                 wrapper.Survey.Update(survey);
-                wrapper.Save();
+
+                await wrapper.SaveAsync();
             }
             catch
             {
@@ -95,11 +98,11 @@ namespace SimpleSurveys.Server.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(long id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                Survey survey = GetById(id);
+                Survey survey = await wrapper.Survey.FindByIDAsync(id);
 
                 if (survey == default(Survey))
                 {
@@ -107,7 +110,8 @@ namespace SimpleSurveys.Server.Controllers
                 }
 
                 wrapper.Survey.Delete(survey);
-                wrapper.Save();
+                
+                await wrapper.SaveAsync();
             }
             catch
             {
@@ -116,7 +120,5 @@ namespace SimpleSurveys.Server.Controllers
 
             return NoContent();
         }
-
-        private Survey GetById(long id) => wrapper.Survey.FindByCondition(s => s.ID == id).FirstOrDefault();
     }
 }

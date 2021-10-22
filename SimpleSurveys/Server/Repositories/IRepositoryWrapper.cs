@@ -1,4 +1,5 @@
 ﻿using SimpleSurveys.Shared.Models;
+using System.Threading.Tasks;
 
 namespace SimpleSurveys.Server.Repositories
 {
@@ -9,6 +10,6 @@ namespace SimpleSurveys.Server.Repositories
         IRepositoryBase<SurveyResult> SurveyResult { get; }
         IRepositoryBase<StepResult> StepResult { get; }
         IRepositoryBase<Value> Value { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

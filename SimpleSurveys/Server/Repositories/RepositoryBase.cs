@@ -4,10 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using SimpleSurveys.Shared.Models;
 using SimpleSurveys.Shared.Configuration;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SimpleSurveys.Server.Repositories
 {
-    public class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public class RepositoryBase<T> : IRepositoryBase<T> where T : EntityID
     {
         private readonly SimpleSurveysContext context;
 
@@ -31,9 +33,29 @@ namespace SimpleSurveys.Server.Repositories
             return context.Set<T>();
         }
 
+        public async Task<IEnumerable<T>> FindAllAsync()
+        {
+            return await FindAll().ToListAsync();
+        }
+
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return context.Set<T>().Where(expression);
+            return FindAll().Where(expression);
+        }
+
+        public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
+        {
+            return await FindByCondition(expression).ToListAsync();
+        }
+
+        public T FindByID(int id)
+        {
+            return FindByCondition(e => e.ID == id).FirstOrDefault();
+        }
+
+        public async Task<T> FindByIDAsync(int id)
+        {
+            return await FindByCondition(e => e.ID == id).FirstOrDefaultAsync();
         }
 
         public void Update(T entity)

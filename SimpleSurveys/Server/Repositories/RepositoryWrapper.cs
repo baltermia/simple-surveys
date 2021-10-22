@@ -1,5 +1,6 @@
 ﻿using SimpleSurveys.Shared.Configuration;
 using SimpleSurveys.Shared.Models;
+using System.Threading.Tasks;
 
 namespace SimpleSurveys.Server.Repositories
 {
@@ -24,8 +25,8 @@ namespace SimpleSurveys.Server.Repositories
             this.context = context;
         }
 
-        public void Save() => context.SaveChanges();
+        public async Task SaveAsync() => await context.SaveChangesAsync();
 
-        private IRepositoryBase<T> CreateBase<T>(ref IRepositoryBase<T> repository) where T : class => repository ??= new RepositoryBase<T>(context);
+        private IRepositoryBase<T> CreateBase<T>(ref IRepositoryBase<T> repository) where T : EntityID => repository ??= new RepositoryBase<T>(context);
     }
 }
