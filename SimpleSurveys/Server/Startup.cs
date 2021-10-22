@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using SimpleSurveys.Server.Repositories;
 using SimpleSurveys.Shared.Models;
 using Newtonsoft.Json;
+using SimpleSurveys.Shared.Configuration;
 
 namespace SimpleSurveys.Server
 {

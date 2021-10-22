@@ -1,4 +1,5 @@
-﻿using SimpleSurveys.Shared.Models;
+﻿using SimpleSurveys.Shared.Configuration;
+using SimpleSurveys.Shared.Models;
 
 namespace SimpleSurveys.Server.Repositories
 {
