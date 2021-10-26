@@ -74,7 +74,7 @@ namespace SimpleSurveys.Shared.Models
     }
 
     /// <summary>
-    /// A Step that has ComboBoxes
+    /// A Step that has checkboxes
     /// </summary>
     public class Check : Step
     {
