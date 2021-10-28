@@ -100,4 +100,4 @@ Running the application is very easy. In the root directory simply open the `sta
 
 You can stop the application at any time by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the command prompt window.
 
-The first time doing this may take a while, as it is downloading all needed nuget packages and building the whole aplication. Make sure that you are connected to the internet properly so the missing nuget packages can be downloaded.
+The first time doing this may take a while, as it is downloading all needed nuget packages and building the whole application. Make sure that you are connected to the internet properly so the missing nuget packages can be downloaded.
