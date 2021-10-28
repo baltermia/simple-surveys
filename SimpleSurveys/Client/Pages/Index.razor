@@ -1,7 +1,10 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<button @onclick="Click">Create Object</button>
+@if (show)
+{
+    <SimpleSurveys.Client.Components.Survey SurveyItem="surveyObj" Mode="Utils.Enums.Mode.Fill" />
+}
+else
+{
+    <p>Waiting...</p>
+}

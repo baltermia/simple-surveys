@@ -2,6 +2,7 @@
 using SimpleSurveys.Shared.Models;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 namespace SimpleSurveys.Client.Pages
 {
@@ -10,25 +11,15 @@ namespace SimpleSurveys.Client.Pages
         [Inject]
         public HttpClient Http { get; set; }
 
-        private async void Click()
+        private Survey surveyObj;
+
+        private bool show = false;
+
+        protected async override Task OnInitializedAsync()
         {
-            Survey survey = new()
-            {
-                Description = "The first survey",
-                Public = true,
-                Title = "The very first Survey!"
-            };
+            surveyObj = await Http.GetFromJsonAsync<Survey>("api/1");
 
-            Step step = new Text()
-            {
-                Title = "This is the first step! Do you like it?",
-                Placeholder = "Put your answer here :)",
-                Required = true
-            };
-
-            survey.Steps.Add(step);
-
-            HttpResponseMessage response = await Http.PostAsJsonAsync("api", survey);
+            show = true;
         }
     }
 }
