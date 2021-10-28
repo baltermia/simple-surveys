@@ -1,0 +1,39 @@
+﻿<style>
+    .survey-title-box p {
+        display: inline;
+    }
+
+    .survey-title-box {
+        margin-bottom: 20px;
+    }
+
+    .survey-title {
+        color: rgba(0,0,0,.85);
+        font-weight: 600;
+        font-size: 38px;
+    }
+
+    .survey-subtitle {
+        font-size: 16px;
+        color: #606060;
+    }
+
+    .survey-updated {
+        margin-left: 10px;
+    }
+</style>
+
+<div class="survey-title-box">
+    <p class="survey-title">@SurveyItem.Title</p>
+    <p class="survey-subtitle survey-updated">Create on <strong>@SurveyItem.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
+    @if (SurveyItem.Updated != null)
+    {
+        <p class="survey-subtitle">, Last updated on <strong>@SurveyItem.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
+
+    }
+</div>
+
+@foreach (var step in SurveyItem.Steps)
+{
+    <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
+}
