@@ -99,3 +99,5 @@ You should now be able to run the app.
 Running the application is very easy. In the root directory simply open the `start.bat` file and the application should start.
 
 You can stop the application at any time by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the command prompt window.
+
+The first time doing this may take a while, as it is downloading all needed nuget packages and building the whole aplication. Make sure that you are connected to the internet properly so the missing nuget packages can be downloaded.
