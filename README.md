@@ -4,7 +4,7 @@
 </div>
 
 ## Installation
-### .NET
+### .NET SDK
 #### Check Installed Versions
 First we need to make sure that the .NET 5.0 SDK is installed.
 For that open a command prompt or powershell window and paste the following command:
@@ -48,7 +48,7 @@ There should be a new entry with `5.0`.
 You need to open a new command prompt/powershell window if you didn't have .NET installed before for the commands to work.
 
 ### MSSQL Server
-For the application to run there also has to be a mssql database running in the background. You can do this either by using a local sql-express server or your own.
+For the application to run there also has to be a mssql server running in the background. You can do this either by using a local sql-express server or your own.
 
 #### SQL-Express Server
 
