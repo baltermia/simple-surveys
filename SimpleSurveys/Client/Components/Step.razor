@@ -17,6 +17,10 @@
     .card-title-box {
         margin-bottom: 20px;
     }
+
+    .step-content {
+        width: 60%;
+    }
 </style>
 
 <Card class="card">
@@ -29,37 +33,39 @@
         }
     </div>
 
-    @switch (StepItem)
-    {
-        case SimpleSurveys.Shared.Models.Radio r:
-            <SimpleSurveys.Client.Components.Radio RadioItem="r" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.Range r:
-            <SimpleSurveys.Client.Components.Range RangeItem="r" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.Text t:
-            <SimpleSurveys.Client.Components.Text TextItem="t" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.Check c:
-            <SimpleSurveys.Client.Components.Check CheckItem="c" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.YesNo y:
-            <SimpleSurveys.Client.Components.YesNo YesNoItem="y" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.Date d:
-            <SimpleSurveys.Client.Components.Date DateItem="d" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.Number n:
-            <SimpleSurveys.Client.Components.Number NumberItem="n" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.Rate r:
-            <SimpleSurveys.Client.Components.Rate RateItem="r" Mode="@Mode" />
-            break;
-        case SimpleSurveys.Shared.Models.DropDown d:
-            <SimpleSurveys.Client.Components.DropDown DropDownItem="d" Mode="@Mode" />
-            break;
-        default:
-            <p>Error: Step is not of any known type</p>
-            break;
-    }
+    <div class="step-content">
+        @switch (StepItem)
+        {
+            case SimpleSurveys.Shared.Models.Radio r:
+                <SimpleSurveys.Client.Components.Radio RadioItem="r" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.Range r:
+                <SimpleSurveys.Client.Components.Range RangeItem="r" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.Text t:
+                <SimpleSurveys.Client.Components.Text TextItem="t" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.Check c:
+                <SimpleSurveys.Client.Components.Check CheckItem="c" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.YesNo y:
+                <SimpleSurveys.Client.Components.YesNo YesNoItem="y" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.Date d:
+                <SimpleSurveys.Client.Components.Date DateItem="d" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.Number n:
+                <SimpleSurveys.Client.Components.Number NumberItem="n" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.Rate r:
+                <SimpleSurveys.Client.Components.Rate RateItem="r" Mode="@Mode" />
+                break;
+            case SimpleSurveys.Shared.Models.DropDown d:
+                <SimpleSurveys.Client.Components.DropDown DropDownItem="d" Mode="@Mode" />
+                break;
+            default:
+                <p>Error: Step is not of any known type</p>
+                break;
+        }
+    </div>
 </Card>
