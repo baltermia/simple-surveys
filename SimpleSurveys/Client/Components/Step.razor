@@ -10,6 +10,11 @@
         font-size: 20px;
     }
 
+    .card-title-edit {
+        width: 60%;
+        border: none;
+    }
+
     .card-title-box p {
         display: inline;
     }
@@ -18,20 +23,42 @@
         margin-bottom: 20px;
     }
 
+    .card-title-box {
+        margin-bottom: 5px;
+    }
+
     .step-content {
         width: 60%;
     }
+
+    .required-box {
+        margin-bottom: 15px;
+    }
 </style>
 
-<Card class="card">
-    <div class="card-title-box">
-        <p class="card-title">@StepItem.Title</p>
 
-        @if (StepItem.Required)
-        {
-            <p class="card-title" style="color: red">*</p>
-        }
-    </div>
+<Card class="card">
+    @if (Mode == Enums.Mode.View)
+    {
+        <div class="card-title-box">
+            <p class="card-title">@StepItem.Title</p>
+
+            @if (StepItem.Required)
+            {
+                <p class="card-title" style="color: red">*</p>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="card-title-box-edit">
+            <p class="card-title">
+                <input class="card-title card-title-edit" placeholder="Title" @bind-value="StepItem.Title" />
+            </p>
+        </div>
+
+        <Checkbox Class="required-box" @bind-Value="StepItem.Required">Required</Checkbox>
+    }
 
     <div class="step-content">
         @switch (StepItem)

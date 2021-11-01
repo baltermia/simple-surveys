@@ -13,6 +13,11 @@
         font-size: 38px;
     }
 
+    .survey-title-edit {
+        width: 100%;
+        border: none;
+    }
+
     .survey-subtitle {
         font-size: 16px;
         color: #606060;
@@ -21,17 +26,57 @@
     .survey-updated {
         margin-left: 10px;
     }
+
+    .public-box {
+        margin-bottom: 15px;
+    }
+
+    .description {
+        font-size: 16px;
+        color: #606060;
+    }
+
+    .item {
+        margin-bottom: 10px;
+    }
 </style>
 
-<div class="survey-title-box">
-    <p class="survey-title">@SurveyItem.Title</p>
-    <p class="survey-subtitle survey-updated">Create on <strong>@SurveyItem.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
-    @if (SurveyItem.Updated != null)
-    {
-        <p class="survey-subtitle">, Last updated on <strong>@SurveyItem.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
+@if (Mode == Enums.Mode.View)
+{
+    <div class="survey-title-box">
+        <p class="survey-title">@SurveyItem.Title</p>
+        <p class="survey-subtitle survey-updated">Create on <strong>@SurveyItem.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
+        @if (SurveyItem.Updated != null)
+        {
+            <p class="survey-subtitle">, Last updated on <strong>@SurveyItem.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
+        }
+    </div>
 
+    <p class="description">@SurveyItem.Description</p>
+}
+else
+{
+    <div class="survey-title-box">
+        <input class="survey-title survey-title-edit" placeholder="Title" @bind-value="SurveyItem.Title" />
+    </div>
+    @if (Mode == Enums.Mode.Edit)
+    {
+        <p class="survey-subtitle survey-updated">Create on <strong>@SurveyItem.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
+        @if (SurveyItem.Updated != null)
+        {
+            <p class="survey-subtitle">, Last updated on <strong>@SurveyItem.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
+        }
     }
-</div>
+
+    <TextArea Class="item" Placeholder="Description" MinRows="3" MaxRows="6" @bind-Value="@SurveyItem.Description" />
+
+    <Checkbox Class="public-box item" @bind-Value="SurveyItem.Public">Public</Checkbox>
+
+    <Input Class="item" Type="number" @bind-Value="SurveyItem.MaxSubmissions" />
+}
+
+
+
 
 @foreach (var step in SurveyItem.Steps)
 {

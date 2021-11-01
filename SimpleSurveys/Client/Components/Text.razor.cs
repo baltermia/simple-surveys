@@ -12,5 +12,13 @@ namespace SimpleSurveys.Client.Components
         public Enums.Mode Mode { get; set; }
 
         public string TextValue { get; private set; }
+
+        protected override void OnInitialized()
+        {
+            if (Mode == Enums.Mode.Create)
+            {
+                TextItem = new();
+            }
+        }
     }
 }

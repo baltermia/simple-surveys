@@ -1,1 +1,17 @@
-﻿<TextArea @bind-Value="TextValue" Placeholder="@(TextItem.Placeholder ?? "")" MinRows="3" MaxRows="6" />
+﻿
+
+@switch (Mode)
+{
+    case Enums.Mode.View:
+        <TextArea @bind-Value="TextValue" Placeholder="@(TextItem.Placeholder ?? "")" MinRows="3" MaxRows="6" />
+        break;
+
+    case Enums.Mode.Edit:
+    case Enums.Mode.Create:
+        <Form Model="TextItem">
+            <FormItem Label="Placeholder">
+                <Input @bind-Value="TextItem.Placeholder" />
+            </FormItem>
+        </Form>
+        break;
+}
