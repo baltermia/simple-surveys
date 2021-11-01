@@ -30,7 +30,11 @@ namespace SimpleSurveys.Server
             // Repository Wrapper
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
-            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.TypeNameHandling = TypeNameHandling.All;
+            });
             services.AddRazorPages();
         }
 
