@@ -6,8 +6,7 @@
         {
             View = 0,
             Create = 1,
-            Edit = 2,
-            Fill = 3
+            Edit = 2
         }
     }
 }
