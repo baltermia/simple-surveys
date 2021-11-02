@@ -1,14 +1,12 @@
 ﻿<style>
-    .card-box {
-        width: 300px;
-        margin-top: 16px;
-        margin-right: 16px;
+    .meta-content {
+        text-wrap: normal;
     }
 </style>
 
-<Card Class="card-box" Bordered>
+<Card Bordered>
     <ChildContent>
-        <CardMeta Title="@SurveyItem.Title" Description="@SurveyItem.Description"/>
+        <CardMeta Class="meta-content" Title="@SurveyItem.Title" Description="@SurveyItem.Description"/>
     </ChildContent>
     <ActionTemplate>
         <CardAction><a href="/view/@SurveyItem.ID"><Icon Type="eye" /></a></CardAction>
