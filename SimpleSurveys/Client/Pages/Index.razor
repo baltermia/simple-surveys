@@ -1,10 +1,7 @@
 ﻿@page "/"
 
-@if (show)
+
+@foreach (Survey survey in Surveys)
 {
-    <SimpleSurveys.Client.Components.Survey SurveyItem="surveyObj" Mode="Utils.Enums.Mode.View" />
-}
-else
-{
-    <p>Waiting...</p>
+    <SimpleSurveys.Client.Components.SurveyPreview SurveyItem="@survey" />
 }
