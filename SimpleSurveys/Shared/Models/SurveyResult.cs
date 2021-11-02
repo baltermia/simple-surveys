@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace SimpleSurveys.Shared.Models
@@ -20,6 +21,7 @@ namespace SimpleSurveys.Shared.Models
         /// </summary>
         public string Name { get; set; } = null;
 
+        [JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
         public virtual ICollection<StepResult> StepResults { get; set; }
 
         public virtual Survey Survey { get; set; }

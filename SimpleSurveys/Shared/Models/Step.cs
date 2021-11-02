@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,6 +26,7 @@ namespace SimpleSurveys.Shared.Models
         /// <summary>
         /// All submitted steps
         /// </summary>
+        [JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
         public virtual ICollection<StepResult> Results { get; set; } = new HashSet<StepResult>();
 
         public virtual Survey Survey { get; set; }
