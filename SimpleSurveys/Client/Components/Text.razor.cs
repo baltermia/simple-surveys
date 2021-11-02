@@ -13,7 +13,7 @@ namespace SimpleSurveys.Client.Components
 
         public string TextValue { get; private set; }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
             if (Mode == Enums.Mode.Create)
             {

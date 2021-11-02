@@ -10,5 +10,13 @@ namespace SimpleSurveys.Client.Components
 
         [Parameter]
         public Enums.Mode Mode { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            if (Mode == Enums.Mode.Create)
+            {
+                YesNoItem = new();
+            }
+        }
     }
 }
