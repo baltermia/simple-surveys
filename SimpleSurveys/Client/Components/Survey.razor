@@ -3,6 +3,10 @@
         display: inline;
     }
 
+    .survey-title-box-update p {
+        display: inline;
+    }
+
     .survey-title-box {
         margin-bottom: 20px;
     }
@@ -39,16 +43,30 @@
     .item {
         margin-bottom: 10px;
     }
+
+    .submissions-input {
+        max-width: 10%;
+        min-width: 100px;
+    }
+
+    .survey-content {
+        width: 60%;
+    }
+
+    .add-step {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
 </style>
 
 @if (Mode == Enums.Mode.View)
 {
     <div class="survey-title-box">
         <p class="survey-title">@SurveyItem.Title</p>
-        <p class="survey-subtitle survey-updated">Create on <strong>@SurveyItem.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
+        <p class="survey-subtitle survey-updated">Created <strong>@SurveyItem.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
         @if (SurveyItem.Updated != null)
         {
-            <p class="survey-subtitle">, Last updated on <strong>@SurveyItem.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
+            <p class="survey-subtitle"> · Updated <strong>@SurveyItem.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
         }
     </div>
 
@@ -56,29 +74,94 @@
 }
 else
 {
-    <div class="survey-title-box">
-        <input class="survey-title survey-title-edit" placeholder="Title" @bind-value="SurveyItem.Title" />
-    </div>
-    @if (Mode == Enums.Mode.Edit)
-    {
-        <p class="survey-subtitle survey-updated">Create on <strong>@SurveyItem.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
-        @if (SurveyItem.Updated != null)
-        {
-            <p class="survey-subtitle">, Last updated on <strong>@SurveyItem.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
-        }
-    }
+    <Form Model="@SurveyItem">
 
-    <TextArea Class="item" Placeholder="Description" MinRows="3" MaxRows="6" @bind-Value="@SurveyItem.Description" />
+        <div class="survey-title-box">
+            <FormItem Required>
+                <input class="survey-title survey-title-edit" placeholder="Title" @bind-value="context.Title" />
+            </FormItem>
+        </div>
 
-    <Checkbox Class="public-box item" @bind-Value="SurveyItem.Public">Public</Checkbox>
+        <div class="survey-content">
+            @if (Mode == Enums.Mode.Edit)
+            {
+                <div class="item survey-title-box-update">
+                    <p class="survey-subtitle">Created <strong>@context.Created.ToString("dd.MM.yyyy HH:mm")</strong></p>
+                    @if (context.Updated != null)
+                    {
+                        <p class="survey-subtitle"> · Updated <strong>@context.Updated?.ToString("dd.MM.yyyy HH:mm")</strong></p>
+                    }
+                </div>
+            }
 
-    <Input Class="item" Type="number" @bind-Value="SurveyItem.MaxSubmissions" />
+            <div class="item">
+                <FormItem>
+                    <TextArea Placeholder="Description" MinRows="3" MaxRows="6" @bind-Value="@context.Description" />
+                </FormItem>
+            </div>
+
+            <div class="item">
+                <FormItem>
+                    <Checkbox Class="public-box" @bind-Value="context.Public">Public</Checkbox>
+                </FormItem>
+            </div>
+
+            <div class="item">
+                <FormItem Label="Max Submissions">
+                    <div class="submissions-input">
+                        <Input Type="number" @bind-Value="context.MaxSubmissions" />
+                    </div>
+                </FormItem>
+            </div>
+        </div>
+
+        <div>
+            @foreach (var step in SurveyItem.Steps)
+            {
+                <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
+            }
+        </div>
+
+        <div class="item add-step">
+            <Button Block Type="@ButtonType.Dashed" Size="@ButtonSize.Large">
+                <div>
+                    <Dropdown BoundaryAdjustMode="@TriggerBoundaryAdjustMode.InView">
+                        <Overlay>
+                            <Menu>
+                                <MenuItem Icon="@IconType.Outline.FileText" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Text>())">Text</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.Number" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Number>())">Number</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.CheckSquare" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Check>())">Check</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.CheckCircle" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Radio>())">Radio</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.ColumnWidth" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Range>())">Range</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.Star" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Rate>())">Rate</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.Calendar" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Date>())">Date</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.UnorderedList" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.DropDown>())">DropDown</MenuItem>
+                                <MenuItem Icon="@IconType.Outline.Control" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.YesNo>())">Yes/No</MenuItem>
+                            </Menu>
+                        </Overlay>
+                        <ChildContent>
+                            <a class="ant-dropdown-link" @onclick:preventDefault>
+                                Add new Step <Icon Type="down" />
+                            </a>
+                        </ChildContent>
+                    </Dropdown>
+                </div>
+            </Button>
+        </div>
+
+        <div class="item">
+            <FormItem>
+                <Button Size="@ButtonSize.Large" Block Type="@ButtonType.Primary" HtmlType="submit" OnClick="OnSubmit">
+                    Submit
+                </Button>
+            </FormItem>
+        </div>
+    </Form>
 }
-
-
-
-
-@foreach (var step in SurveyItem.Steps)
+@if (Mode == Enums.Mode.View)
 {
-    <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
+    @foreach (var step in SurveyItem.Steps)
+    {
+        <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
+    }
 }
