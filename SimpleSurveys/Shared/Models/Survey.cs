@@ -56,7 +56,7 @@ namespace SimpleSurveys.Shared.Models
         /// </summary>
         public bool Public { get; set; } = true;
 
-        [JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
+        [JsonProperty(ItemTypeNameHandling = TypeNameHandling.Objects)]
         public virtual ICollection<Step> Steps { get; set; }
 
         public virtual ICollection<SurveyResult> SurveyResults { get; set; }

@@ -26,7 +26,7 @@ namespace SimpleSurveys.Shared.Models
         /// <summary>
         /// All submitted steps
         /// </summary>
-        [JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
+        [JsonProperty(ItemTypeNameHandling = TypeNameHandling.Objects)]
         public virtual ICollection<StepResult> Results { get; set; } = new HashSet<StepResult>();
 
         public virtual Survey Survey { get; set; }
