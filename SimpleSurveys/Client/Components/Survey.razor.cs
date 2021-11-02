@@ -11,6 +11,18 @@ namespace SimpleSurveys.Client.Components
         [Parameter]
         public Enums.Mode Mode { get; set; }
 
+        private ushort? submissionsValue
+        {
+            get
+            {
+                return (ushort?)SurveyItem.MaxSubmissions;
+            }
+            set
+            {
+                SurveyItem.MaxSubmissions = value;
+            }
+        }
+
         protected override void OnParametersSet()
         {
             SurveyItem = new();

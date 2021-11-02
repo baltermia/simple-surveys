@@ -49,6 +49,11 @@
         min-width: 100px;
     }
 
+    .submissions-input {
+        max-width: 20%;
+        min-width: 200px;
+    }
+
     .survey-content {
         width: 60%;
     }
@@ -101,15 +106,31 @@ else
             </div>
 
             <div class="item">
+                <FormItem Label="Password">
+                    <div class="password-input">
+                        <InputPassword @bind-Value="context.Password" DefaultValue="@null" OnChange="@(() => { if (context.Password == null) context.Public = true; })" />
+                    </div>
+                </FormItem>
+            </div>
+
+            <div class="item">
                 <FormItem>
-                    <Checkbox Class="public-box" @bind-Value="context.Public">Public</Checkbox>
+                    <Popover>
+                        <ContentTemplate>
+                            <p>When unchecked, the results are</p>
+                            <p>only viewable with the password.</p>
+                        </ContentTemplate>
+                        <ChildContent>
+                            <Checkbox Disabled="@(context.Password == null)" Checked="@(context.Password != null && context.Public)" Class="public-box" @bind-Value="context.Public">Public Results</Checkbox>
+                        </ChildContent>
+                    </Popover>
                 </FormItem>
             </div>
 
             <div class="item">
                 <FormItem Label="Max Submissions">
                     <div class="submissions-input">
-                        <Input Type="number" @bind-Value="context.MaxSubmissions" />
+                        <AntDesign.InputNumber @bind-Value="submissionsValue" DefaultValue="@null" TValue="ushort?" />
                     </div>
                 </FormItem>
             </div>
