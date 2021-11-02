@@ -1,7 +1,26 @@
 ﻿@page "/"
 
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        grid-gap: 16px;
+    }
 
-@foreach (Survey survey in Surveys)
-{
-    <SimpleSurveys.Client.Components.SurveyPreview SurveyItem="@survey" />
-}
+    .page-title {
+        color: rgba(0,0,0,.85);
+        font-weight: 600;
+        font-size: 38px;
+    }
+</style>
+
+<p class="page-title">Welcome to SimpleSurveys! Select a Survey to get started.</p>
+
+<div class="grid-container">
+    @foreach (Survey survey in Surveys)
+    {
+        <div class="grid-item">
+            <SimpleSurveys.Client.Components.SurveyPreview SurveyItem="@survey" />
+        </div>
+    }
+</div>
