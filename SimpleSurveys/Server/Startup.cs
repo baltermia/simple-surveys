@@ -25,7 +25,7 @@ namespace SimpleSurveys.Server
         public void ConfigureServices(IServiceCollection services)
         {
             // DB Context
-            services.AddDbContext<SimpleSurveysContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SimpleSurveysContext>(options => options/*.UseLazyLoadingProxies()*/.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Repository Wrapper
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

@@ -12,18 +12,7 @@ namespace SimpleSurveys.Client.Utils
             TypeNameHandling = TypeNameHandling.Auto
         };
 
-        public static async Task<T> GetBasicAsync<T>(this HttpClient client, string url)
-        {
-            HttpResponseMessage result = await client.GetAsync(url);
-
-            string resultJson = await result.Content.ReadAsStringAsync();
-
-            T value = JsonConvert.DeserializeObject<T>(resultJson, settings);
-
-            return value;
-        }
-
-        public static async Task<T> PostBasicAsync<T>(this HttpClient client, string url, T value)
+        public static async Task<HttpResponseMessage> PostBasicAsync<T>(this HttpClient client, string url, T value)
         {
             string json = JsonConvert.SerializeObject(value, settings);
 
@@ -31,14 +20,10 @@ namespace SimpleSurveys.Client.Utils
 
             HttpResponseMessage result = await client.PostAsync(url, content);
 
-            string resultJson = await result.Content.ReadAsStringAsync();
-
-            T created = JsonConvert.DeserializeObject<T>(resultJson, settings);
-
-            return created;
+            return result;
         }
 
-        public static async Task<T> PutBasicAsync<T>(this HttpClient client, string url, T value)
+        public static async Task<HttpResponseMessage> PutBasicAsync<T>(this HttpClient client, string url, T value)
         {
             string json = JsonConvert.SerializeObject(value, settings);
 
@@ -46,13 +31,9 @@ namespace SimpleSurveys.Client.Utils
 
             HttpResponseMessage result = await client.PutAsync(url, content);
 
-            string resultJson = await result.Content.ReadAsStringAsync();
-
-            T updated = JsonConvert.DeserializeObject<T>(resultJson, settings);
-
-            return updated;
+            return result;
         }
 
-        private static StringContent GetContent(string json) => new StringContent(json, Encoding.UTF8, "application/json");
+        private static StringContent GetContent(string json) => new(json, Encoding.UTF8, "application/json");
     }
 }
