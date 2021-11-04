@@ -30,7 +30,7 @@ namespace SimpleSurveys.Server.Repositories
 
         public IQueryable<T> FindAll()
         {
-            return context.Set<T>();
+            return context.Set<T>().AsNoTracking();
         }
 
         public async Task<IEnumerable<T>> FindAllAsync()
@@ -40,7 +40,7 @@ namespace SimpleSurveys.Server.Repositories
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return FindAll().Where(expression);
+            return FindAll().Where(expression).AsNoTracking();
         }
 
         public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
