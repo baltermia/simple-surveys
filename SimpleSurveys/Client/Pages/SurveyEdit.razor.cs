@@ -12,7 +12,7 @@ namespace SimpleSurveys.Client.Pages
         [Inject]
         public HttpClient Http { get; set; }
 
-        [Parameter]
+        [Inject]
         public NavigationManager NavManager { get; set; }
 
         [Parameter]
@@ -29,9 +29,11 @@ namespace SimpleSurveys.Client.Pages
 
         private async void OnSubmit(Survey survey)
         {
-            await Http.PutBasicAsync("api/" + survey.ID, survey);
+            int id = survey.ID;
 
-            NavManager.NavigateTo("/view/" + survey.ID);
+            await Http.PutBasicAsync("api/" + id, survey);
+
+            NavManager.NavigateTo("/view/" + id);
         }
     }
 }
