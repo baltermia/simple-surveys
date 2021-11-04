@@ -23,7 +23,7 @@
         margin-bottom: 20px;
     }
 
-    .card-title-box {
+    .card-title-box-edit {
         margin-bottom: 5px;
     }
 
@@ -33,6 +33,11 @@
 
     .required-box {
         margin-bottom: 15px;
+    }
+
+    .operations {
+        float: right;
+        display: inline-block;
     }
 </style>
 
@@ -51,6 +56,12 @@
     }
     else
     {
+        <div class="operations">
+            <Button Type="@AntDesign.ButtonType.Link" Icon="@AntDesign.IconType.Outline.Up" OnClick="OnUpClick" />
+            <Button Type="@AntDesign.ButtonType.Link" Icon="@AntDesign.IconType.Outline.Down" OnClick="OnDownClick" />
+            <Button Type="@AntDesign.ButtonType.Link" Danger Icon="@AntDesign.IconType.Outline.Close" OnClick="OnCloseClick" />
+        </div>
+
         <div class="card-title-box-edit">
             <p class="card-title">
                 <input class="card-title card-title-edit" placeholder="Title" @bind-value="StepItem.Title" />

@@ -76,6 +76,11 @@
     </div>
 
     <p class="description">@SurveyItem.Description</p>
+
+    @foreach (var step in SurveyItem.Steps.OrderBy(s => s.Position))
+    {
+        <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
+    }
 }
 else
 {
@@ -115,14 +120,8 @@ else
 
             <div class="item">
                 <FormItem>
-                    <Popover>
-                        <ContentTemplate>
-                            <p>When unchecked, the results are</p>
-                            <p>only viewable with the password.</p>
-                        </ContentTemplate>
-                        <ChildContent>
-                            <Checkbox Disabled="@(context.Password == null)" Checked="@(context.Password != null && context.Public)" Class="public-box" @bind-Value="context.Public">Public Results</Checkbox>
-                        </ChildContent>
+                    <Popover Content="Password is required to manage result visibility.">
+                        <Checkbox Disabled="@(context.Password == null)" Checked="@(context.Password != null && context.Public)" Class="public-box" @bind-Value="context.Public">Public Results</Checkbox>
                     </Popover>
                 </FormItem>
             </div>
@@ -137,52 +136,43 @@ else
         </div>
 
         <div>
-            @foreach (var step in SurveyItem.Steps)
+            @foreach (var step in SurveyItem.Steps.OrderBy(s => s.Position))
             {
-                <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
+                <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" OnUp="OnStepUp" OnDown="OnStepDown" OnClose="OnStepClose" />
             }
         </div>
 
         <div class="item add-step">
             <Button Block Type="@ButtonType.Dashed" Size="@ButtonSize.Large">
-                <div>
-                    <Dropdown BoundaryAdjustMode="@TriggerBoundaryAdjustMode.InView">
-                        <Overlay>
-                            <Menu>
-                                <MenuItem Icon="@IconType.Outline.FileText" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Text>())">Text</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.Number" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Number>())">Number</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.CheckSquare" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Check>())">Check</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.CheckCircle" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Radio>())">Radio</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.ColumnWidth" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Range>())">Range</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.Star" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Rate>())">Rate</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.Calendar" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Date>())">Date</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.UnorderedList" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.DropDown>())">DropDown</MenuItem>
-                                <MenuItem Icon="@IconType.Outline.Control" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.YesNo>())">Yes/No</MenuItem>
-                            </Menu>
-                        </Overlay>
-                        <ChildContent>
-                            <a class="ant-dropdown-link" @onclick:preventDefault>
-                                Add new Step <Icon Type="down" />
-                            </a>
-                        </ChildContent>
-                    </Dropdown>
-                </div>
+                <Dropdown BoundaryAdjustMode="@TriggerBoundaryAdjustMode.InView">
+                    <Overlay>
+                        <Menu>
+                            <MenuItem Icon="@IconType.Outline.FileText" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Text>())">Text</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Number" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Number>())">Number</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.CheckSquare" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Check>())">Check</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.CheckCircle" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Radio>())">Radio</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.ColumnWidth" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Range>())">Range</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Star" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Rate>())">Rate</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Calendar" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Date>())">Date</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.UnorderedList" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.DropDown>())">DropDown</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Control" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.YesNo>())">Yes/No</MenuItem>
+                        </Menu>
+                    </Overlay>
+                    <ChildContent>
+                        <a class="ant-dropdown-link" @onclick:preventDefault>
+                            Add new Step <Icon Type="down" />
+                        </a>
+                    </ChildContent>
+                </Dropdown>
             </Button>
         </div>
 
         <div class="item">
             <FormItem>
-                <Button Size="@ButtonSize.Large" Block Type="@ButtonType.Primary" HtmlType="submit" OnClick="OnSubmit">
+                <Button Size="@ButtonSize.Large" Block Type="@ButtonType.Primary" HtmlType="submit" OnClick="OnSubmitClickAsync">
                     Submit
                 </Button>
             </FormItem>
         </div>
     </Form>
-}
-@if (Mode == Enums.Mode.View)
-{
-    @foreach (var step in SurveyItem.Steps)
-    {
-        <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
-    }
 }
