@@ -1,20 +1,22 @@
 ﻿@page "/edit/{Id:int}"
 
+<style>
+</style>
+
 @{
     RenderFragment footer = @<Template>
-        <Button OnClick="@HandleSubmit" @key="@( "submit" )">Submit</Button>
+        <Button OnClick="@HandleSubmit" @key="@( "submit" )" Type="@ButtonType.Primary">Submit</Button>
         <Button OnClick="@HandleCancel" @key="@( "back" )">Return</Button>
-
     </Template>;
 }
 
 <Modal MaskClosable="false" Closable="false" Visible="@visible" Title="Password required" Footer="@footer">
     <p>Please enter the survey-password for editing.</p>
-    <Form Model="@SurveyItem">
-        <FormItem Label="Password" ValidateStatus="validation">
-            <InputPassword @bind-Value="password" />
-        </FormItem>
-    </Form>
+    <InputPassword @bind-Value="password" Placeholder="Password" />
+    @if (showError)
+    {
+        <p style="color: red; font-size: 12px;">Password is incorrect. Try again.</p>
+    }
 </Modal>
 
 <SimpleSurveys.Client.Components.Survey SurveyItem="SurveyItem" Mode="Utils.Enums.Mode.Edit" OnSubmit="OnSubmit" />

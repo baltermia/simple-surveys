@@ -23,7 +23,7 @@ namespace SimpleSurveys.Client.Pages
 
         private string password = string.Empty;
         private bool visible = true;
-        private FormValidateStatus validation = FormValidateStatus.Default;
+        private bool showError = false;
 
         protected async override Task OnParametersSetAsync()
         {
@@ -55,7 +55,7 @@ namespace SimpleSurveys.Client.Pages
         {
             if (password != SurveyItem.Password)
             {
-                validation = FormValidateStatus.Error;
+                showError = true;
 
                 return;
             }
