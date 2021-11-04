@@ -14,13 +14,17 @@ namespace SimpleSurveys.Client.Pages
         [Parameter]
         public int Id { get; set; }
 
-        private Survey SurveyItem { get; set; }
+        private Survey SurveyItem { get; set; } = new();
 
         protected async override Task OnParametersSetAsync()
         {
             SurveyItem = await Http.GetFromJsonAsync<Survey>("api/" + Id);
 
             await base.OnParametersSetAsync();
+        }
+        private void OnSubmit(SurveyResult result)
+        {
+
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SimpleSurveys.Client.Utils;
 using SimpleSurveys.Shared.Models;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace SimpleSurveys.Client.Pages
 {
@@ -10,13 +10,16 @@ namespace SimpleSurveys.Client.Pages
         [Inject]
         public HttpClient Http { get; set; }
 
-        private Survey SurveyItem { get; set; }
+        [Inject]
+        public NavigationManager NavManager { get; set; }
 
-        protected async override Task OnParametersSetAsync()
+        private async void OnSubmit(Survey survey)
         {
-            SurveyItem = new();
+            HttpResponseMessage result = await Http.PostBasicAsync("api", survey);
 
-            await base.OnParametersSetAsync();
+            Survey created = await result.DeserializeResponse<Survey>();
+
+            NavManager.NavigateTo("/view/" + created.ID);
         }
     }
 }

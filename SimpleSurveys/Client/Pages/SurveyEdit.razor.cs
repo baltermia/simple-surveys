@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SimpleSurveys.Client.Utils;
 using SimpleSurveys.Shared.Models;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -12,15 +13,27 @@ namespace SimpleSurveys.Client.Pages
         public HttpClient Http { get; set; }
 
         [Parameter]
+        public NavigationManager NavManager { get; set; }
+
+        [Parameter]
         public int Id { get; set; }
 
-        private Survey SurveyItem { get; set; }
+        private Survey SurveyItem { get; set; } = new();
 
         protected async override Task OnParametersSetAsync()
         {
             SurveyItem = await Http.GetFromJsonAsync<Survey>("api/" + Id);
 
             await base.OnParametersSetAsync();
+        }
+
+        private async void OnSubmit(Survey survey)
+        {
+            HttpResponseMessage result = await Http.PutBasicAsync("api/" + survey.ID, survey);
+
+            Survey updated = await result.DeserializeResponse<Survey>();
+
+            NavManager.NavigateTo("/view/" + updated.ID);
         }
     }
 }
