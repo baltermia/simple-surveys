@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using AntDesign;
+using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
 using SimpleSurveys.Shared.Models;
 using System.Net.Http;
@@ -20,6 +21,10 @@ namespace SimpleSurveys.Client.Pages
 
         private Survey SurveyItem { get; set; } = new();
 
+        private string password = string.Empty;
+        private bool visible = true;
+        private FormValidateStatus validation = FormValidateStatus.Default;
+
         protected async override Task OnParametersSetAsync()
         {
             SurveyItem = await Http.GetFromJsonAsync<Survey>("api/" + Id);
@@ -29,11 +34,33 @@ namespace SimpleSurveys.Client.Pages
 
         private async void OnSubmit(Survey survey)
         {
+            if (visible)
+            {
+                return;
+            }
+
             int id = survey.ID;
 
             await Http.PutBasicAsync("api/" + id, survey);
 
             NavManager.NavigateTo("/view/" + id);
+        }
+
+        private void HandleCancel()
+        {
+            NavManager.NavigateTo("view/" + SurveyItem.ID);
+        }
+
+        private void HandleSubmit()
+        {
+            if (password != SurveyItem.Password)
+            {
+                validation = FormValidateStatus.Error;
+
+                return;
+            }
+
+            visible = false;
         }
     }
 }
