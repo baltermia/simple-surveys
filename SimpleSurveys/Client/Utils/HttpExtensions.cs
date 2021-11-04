@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace SimpleSurveys.Client.Utils
 {
-    public static class HttpClientExtensions
+    public static class HttpExtensions
     {
-        private static JsonSerializerSettings settings = new()
+        private static readonly JsonSerializerSettings settings = new()
         {
             TypeNameHandling = TypeNameHandling.Auto
         };
@@ -32,6 +32,15 @@ namespace SimpleSurveys.Client.Utils
             HttpResponseMessage result = await client.PutAsync(url, content);
 
             return result;
+        }
+
+        public static async Task<T> DeserializeResponse<T>(this HttpResponseMessage response)
+        {
+            string json = await response.Content.ReadAsStringAsync();
+
+            T value = JsonConvert.DeserializeObject<T>(json, settings);
+
+            return value;
         }
 
         private static StringContent GetContent(string json) => new(json, Encoding.UTF8, "application/json");
