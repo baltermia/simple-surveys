@@ -50,6 +50,7 @@ namespace SimpleSurveys.Shared.Migrations
                     SurveyID = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Required = table.Column<bool>(type: "bit", nullable: false),
+                    Position = table.Column<int>(type: "int", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Placeholder = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date_Default = table.Column<DateTime>(type: "datetime2", nullable: true),

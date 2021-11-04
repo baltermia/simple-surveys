@@ -24,6 +24,12 @@ namespace SimpleSurveys.Shared.Models
         public bool Required { get; set; } = false;
 
         /// <summary>
+        /// Specifies in what order the Step is positioned at. E.g 0 would be the first
+        /// </summary>
+        [Required]
+        public int Position { get; set; }
+
+        /// <summary>
         /// All submitted steps
         /// </summary>
         [JsonProperty(ItemTypeNameHandling = TypeNameHandling.Objects)]

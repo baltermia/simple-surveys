@@ -106,6 +106,9 @@ namespace SimpleSurveys.Shared.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Required")
                         .HasColumnType("bit");
 

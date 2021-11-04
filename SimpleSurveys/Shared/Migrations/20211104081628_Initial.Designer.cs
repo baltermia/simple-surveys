@@ -10,7 +10,7 @@ using SimpleSurveys.Shared.Configuration;
 namespace SimpleSurveys.Shared.Migrations
 {
     [DbContext(typeof(SimpleSurveysContext))]
-    [Migration("20211102084927_Initial")]
+    [Migration("20211104081628_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,9 @@ namespace SimpleSurveys.Shared.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Required")
                         .HasColumnType("bit");
