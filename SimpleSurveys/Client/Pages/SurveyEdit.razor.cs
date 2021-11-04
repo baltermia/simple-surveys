@@ -29,11 +29,9 @@ namespace SimpleSurveys.Client.Pages
 
         private async void OnSubmit(Survey survey)
         {
-            HttpResponseMessage result = await Http.PutBasicAsync("api/" + survey.ID, survey);
+            await Http.PutBasicAsync("api/" + survey.ID, survey);
 
-            Survey updated = await result.DeserializeResponse<Survey>();
-
-            NavManager.NavigateTo("/view/" + updated.ID);
+            NavManager.NavigateTo("/view/" + survey.ID);
         }
     }
 }
