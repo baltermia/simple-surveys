@@ -15,7 +15,7 @@
 @if (Mode == Enums.Mode.View)
 {
     <div class="yesno-box">
-        <Button Class="yes-button yesno-button" Type="@yesType" Size="@ButtonSize.Large">Yes</Button>
-        <Button Class="yesno-button" Type="@noType" Size="@ButtonSize.Large">No</Button>
+        <Button Class="yes-button yesno-button" Type="@yesType" Size="@ButtonSize.Large" OnClick="YesClick">Yes</Button>
+        <Button Class="yesno-button" Type="@noType" Size="@ButtonSize.Large" OnClick="NoClick">No</Button>
     </div>
 }
