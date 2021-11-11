@@ -1,5 +1,10 @@
-﻿<h3>Rate</h3>
-
-@code {
-
+﻿@switch (Mode)
+{
+    case Enums.Mode.View:
+        <AntDesign.Rate AllowClear AllowHalf="@RateItem.AllowHalf" @bind-Value="RateValue" />
+        break;
+    case Enums.Mode.Edit:
+    case Enums.Mode.Create:
+        <Checkbox @bind-Value="RateItem.AllowHalf">Allow half stars</Checkbox>
+        break;
 }
