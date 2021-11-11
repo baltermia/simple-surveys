@@ -1,5 +1,21 @@
-﻿<h3>YesNo</h3>
+﻿<style>
+    .yesno-box {
+        display: inline-block;
+    }
 
-@code {
+    .yes-button {
+        margin-right: 5px;
+    }
 
+    .yesno-button {
+        width: 150px;
+    }
+</style>
+
+@if (Mode == Enums.Mode.View)
+{
+    <div class="yesno-box">
+        <Button Class="yes-button yesno-button" Type="@yesType" Size="@ButtonSize.Large">Yes</Button>
+        <Button Class="yesno-button" Type="@noType" Size="@ButtonSize.Large">No</Button>
+    </div>
 }

@@ -11,6 +11,11 @@ namespace SimpleSurveys.Client.Components
         [Parameter]
         public Enums.Mode Mode { get; set; }
 
+        public bool? Result { get; private set; }
+
+        private string yesType = AntDesign.ButtonType.Primary;
+        private string noType = AntDesign.ButtonType.Default;
+
         protected override void OnParametersSet()
         {
             if (Mode == Enums.Mode.Create)
