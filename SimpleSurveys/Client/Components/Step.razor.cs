@@ -20,6 +20,24 @@ namespace SimpleSurveys.Client.Components
         [Parameter]
         public EventCallback<SimpleSurveys.Shared.Models.Step> OnClose { get; set; }
 
+        private string StepIcon
+        {
+            get => mIcon;
+            set
+            {
+                if (mIcon == value)
+                {
+                    return;
+                }
+
+                mIcon = value;
+
+                StateHasChanged();
+            }
+        }
+
+        private string mIcon = AntDesign.IconType.Outline.Question;
+
         private async void OnUpClick()
         {
             await OnUp.InvokeAsync(StepItem);

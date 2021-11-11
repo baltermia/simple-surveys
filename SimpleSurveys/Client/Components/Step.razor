@@ -39,6 +39,10 @@
         float: right;
         display: inline-block;
     }
+
+    .step-icon {
+        margin-right: 2px;
+    }
 </style>
 
 
@@ -64,7 +68,7 @@
 
         <div class="card-title-box-edit">
             <p class="card-title">
-                <input class="card-title card-title-edit" placeholder="Title" @bind-value="StepItem.Title" />
+                <Icon Type="@StepIcon" Class="step-icon" /><input class="card-title card-title-edit" placeholder="Title" @bind-value="StepItem.Title" />
             </p>
         </div>
 
@@ -75,30 +79,39 @@
         @switch (StepItem)
         {
             case SimpleSurveys.Shared.Models.Radio r:
+                StepIcon = AntDesign.IconType.Outline.CheckCircle;
                 <SimpleSurveys.Client.Components.Radio RadioItem="r" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.Range r:
+                StepIcon = AntDesign.IconType.Outline.ColumnWidth;
                 <SimpleSurveys.Client.Components.Range RangeItem="r" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.Text t:
+                StepIcon = AntDesign.IconType.Outline.FileText;
                 <SimpleSurveys.Client.Components.Text TextItem="t" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.Check c:
+                StepIcon = AntDesign.IconType.Outline.CheckSquare;
                 <SimpleSurveys.Client.Components.Check CheckItem="c" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.YesNo y:
+                StepIcon = AntDesign.IconType.Outline.Control;
                 <SimpleSurveys.Client.Components.YesNo YesNoItem="y" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.Date d:
+                StepIcon = AntDesign.IconType.Outline.Calendar;
                 <SimpleSurveys.Client.Components.Date DateItem="d" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.Number n:
+                StepIcon = AntDesign.IconType.Outline.Number;
                 <SimpleSurveys.Client.Components.Number NumberItem="n" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.Rate r:
+                StepIcon = AntDesign.IconType.Outline.Star;
                 <SimpleSurveys.Client.Components.Rate RateItem="r" Mode="@Mode" />
                 break;
             case SimpleSurveys.Shared.Models.DropDown d:
+                StepIcon = AntDesign.IconType.Outline.UnorderedList;
                 <SimpleSurveys.Client.Components.DropDown DropDownItem="d" Mode="@Mode" />
                 break;
             default:
