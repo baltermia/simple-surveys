@@ -1,5 +1,19 @@
-﻿<h3>Number</h3>
+﻿@switch (Mode)
+{
+    case Enums.Mode.View:
+        <Input Type="number" @bind-Value="NumberValue" Placeholder="@(NumberItem.Placeholder ?? "")" />
+        break;
 
-@code {
+    case Enums.Mode.Edit:
+    case Enums.Mode.Create:
+        <Form Model="NumberItem">
+            <FormItem Label="Placeholder">
+                <Input @bind-Value="NumberItem.Placeholder" />
+            </FormItem>
 
+            <FormItem Label="Default Value">
+                <Input Type="number" @bind-Value="NumberItem.Default" />
+            </FormItem>
+        </Form>
+        break;
 }

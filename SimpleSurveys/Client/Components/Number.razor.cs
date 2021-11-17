@@ -11,11 +11,18 @@ namespace SimpleSurveys.Client.Components
         [Parameter]
         public Enums.Mode Mode { get; set; }
 
+        public int? NumberValue { get; set; }
+
         protected override void OnParametersSet()
         {
-            if (Mode == Enums.Mode.Create)
+            switch (Mode) 
             {
-                NumberItem = new();
+                case Enums.Mode.Create:
+                    NumberItem = new();
+                    break;
+                case Enums.Mode.View:
+                    NumberValue = NumberItem.Default;
+                    break;
             }
         }
     }
