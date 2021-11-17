@@ -187,12 +187,12 @@ namespace SimpleSurveys.Shared.Models
     /// </summary>
     public enum DatePickerType
     {
-        DateTime,   // Both date and time
-        Date,       // Only Date
-        Week,
-        Month,
-        Quarter,
-        Year,
-        Time        // Only Time
+        DateTime = 0,   // Both date and time
+        Date = 1,        // Only Date
+        Week = 2,
+        Month = 3,
+        Quarter = 4,
+        Year = 5,
+        Time = 6        // Only Time
     }
 }
