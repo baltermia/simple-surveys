@@ -33,7 +33,7 @@ namespace SimpleSurveys.Client.Components
             }
             else
             {
-                Result = false;
+                Result = true;
             }
 
             ChangeButtonTypes();
@@ -47,7 +47,7 @@ namespace SimpleSurveys.Client.Components
             }
             else
             {
-                Result = true;
+                Result = false;
             }
 
             ChangeButtonTypes();
