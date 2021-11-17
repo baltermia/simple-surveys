@@ -1,5 +1,49 @@
-﻿<h3>Date</h3>
+﻿@using DatePickerType = SimpleSurveys.Shared.Models.DatePickerType 
 
-@code {
+@switch (Mode)
+{
+    case Enums.Mode.View:
+        @if (DateItem.Type == SimpleSurveys.Shared.Models.DatePickerType.DateTime)
+        {
+            <DatePicker TValue="DateTime?" ShowTime="true" @bind-Value="DateValue" Placeholder="@(DateItem.Placeholder ?? "")" />
+        }
+        else
+        {
+            <DatePicker TValue="DateTime?" @bind-Value="DateValue" Placeholder="@(DateItem.Placeholder ?? "")" Picker="@DateItem.Type.ToString().ToLower()" />
+        }
+        break;
 
+    case Enums.Mode.Edit:
+    case Enums.Mode.Create:
+        <Form Model="DateItem">
+            <FormItem Label="Placeholder">
+                <Input @bind-Value="@context.Placeholder" />
+            </FormItem>
+
+            <FormItem Label="Date Type">
+                <Select @bind-Value="dateType"
+                        DefaultValue="@DatePickerType.Date"
+                        TItemValue="@DatePickerType",
+                        TItem="@DatePickerType">
+                    <SelectOptions>
+                        @foreach (DatePickerType type in Enum.GetValues(typeof(DatePickerType)).Cast<DatePickerType>().OrderBy(e => (int)e))
+                        {
+                            <SelectOption TItem="@DatePickerType" TItemValue="@DatePickerType" Value="@type" Label="@type.ToString()" />
+                        }
+                    </SelectOptions>
+                </Select>
+            </FormItem>
+
+            <FormItem Label="Default Value">
+                @if (context.Type == SimpleSurveys.Shared.Models.DatePickerType.DateTime)
+                {
+                    <DatePicker TValue="DateTime?" ShowTime="true" @bind-Value="context.Default" />
+                }
+                else
+                {
+                    <DatePicker TValue="DateTime?" Picker="@(context?.Type.ToString().ToLower() ?? "date")" @bind-Value="context.Default" />
+                }
+            </FormItem>
+        </Form>
+        break;
 }
