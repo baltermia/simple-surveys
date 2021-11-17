@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using AntDesign;
+using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
 
 namespace SimpleSurveys.Client.Components
@@ -11,12 +12,26 @@ namespace SimpleSurveys.Client.Components
         [Parameter]
         public Enums.Mode Mode { get; set; }
 
+        private double rangeDouble { get; set; }
+
+        private bool paramsSet = false;
+
+        public int RangeValue
+        {
+            get => (int)rangeDouble;
+            set => rangeDouble = value;
+        }
+
         protected override void OnParametersSet()
         {
-            if (Mode == Enums.Mode.Create)
+            switch (Mode)
             {
-                RangeItem = new();
+                case Enums.Mode.Create:
+                    RangeItem = new();
+                    break;
             }
+
+            paramsSet = true;
         }
     }
 }

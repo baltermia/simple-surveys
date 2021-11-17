@@ -1,5 +1,22 @@
-﻿<h3>Range</h3>
+﻿@switch (Mode)
+{
+    case Enums.Mode.View:
+        @if (paramsSet)
+        {
+            <Slider TValue="double" Min="@RangeItem.Min" Max="@RangeItem.Max" @bind-Value="rangeDouble" Step="1" Marks="@(new SliderMark[] { new SliderMark(RangeItem.Min, RangeItem.Min.ToString()), new SliderMark(RangeItem.Max, RangeItem.Max.ToString()) })" />
+        }
+        break;
 
-@code {
+    case Enums.Mode.Edit:
+    case Enums.Mode.Create:
+        <Form Model="RangeItem">
+            <FormItem Label="Minimum Value">
+                <Input TValue="int" Type="number" @bind-Value="@context.Min" />
+            </FormItem>
 
+            <FormItem Label="Maximum Value">
+                <Input TValue="int" Type="number" @bind-Value="@context.Max" />
+            </FormItem>
+        </Form>
+        break;
 }
