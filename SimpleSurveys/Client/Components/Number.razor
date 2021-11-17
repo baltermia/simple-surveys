@@ -1,7 +1,7 @@
 ﻿@switch (Mode)
 {
     case Enums.Mode.View:
-        <Input Type="number" @bind-Value="NumberValue" Placeholder="@(NumberItem.Placeholder ?? "")" />
+        <Input TValue="int?" Type="number" @bind-Value="NumberValue" Placeholder="@(NumberItem.Placeholder ?? "")" />
         break;
 
     case Enums.Mode.Edit:
@@ -12,7 +12,7 @@
             </FormItem>
 
             <FormItem Label="Default Value">
-                <Input Type="number" @bind-Value="NumberItem.Default" />
+                <Input TValue="int?" Type="number" @bind-Value="NumberItem.Default" />
             </FormItem>
         </Form>
         break;
