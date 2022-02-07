@@ -78,7 +78,7 @@
 
     <p class="description">@SurveyItem.Description</p>
 
-    @foreach (var step in SurveyItem.Steps.OrderBy(s => s.Position))
+    @foreach (SimpleSurveys.Shared.Models.Step step in SurveyItem.Steps.OrderBy(s => s.Position))
     {
         <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
     }
@@ -137,7 +137,7 @@ else
         </div>
 
         <div>
-            @foreach (var step in SurveyItem.Steps.OrderBy(s => s.Position))
+            @foreach (SimpleSurveys.Shared.Models.Step step in SurveyItem.Steps.OrderBy(s => s.Position))
             {
                 <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" OnUp="OnStepUp" OnDown="OnStepDown" OnClose="OnStepClose" />
             }

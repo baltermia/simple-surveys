@@ -72,7 +72,7 @@ namespace SimpleSurveys.Client.Components
 
             int current = step.Position;
 
-            var down = SurveyItem.Steps.SingleOrDefault(s => s.Position == current - 1);
+            SimpleSurveys.Shared.Models.Step down = SurveyItem.Steps.SingleOrDefault(s => s.Position == current - 1);
 
             if (down != default(SimpleSurveys.Shared.Models.Step))
             {
@@ -88,7 +88,7 @@ namespace SimpleSurveys.Client.Components
 
             int current = step.Position;
 
-            var up = SurveyItem.Steps.SingleOrDefault(s => s.Position == current + 1);
+            SimpleSurveys.Shared.Models.Step up = SurveyItem.Steps.SingleOrDefault(s => s.Position == current + 1);
 
             if (up != default(SimpleSurveys.Shared.Models.Step))
             {
@@ -111,7 +111,7 @@ namespace SimpleSurveys.Client.Components
 
             for (int i = 0; i < ordered.Count; i++)
             {
-                var step = SurveyItem.Steps.Single(s => s == ordered.ElementAt(i));
+                SimpleSurveys.Shared.Models.Step step = SurveyItem.Steps.Single(s => s == ordered.ElementAt(i));
 
                 step.Position = i;
             }
