@@ -3,7 +3,7 @@ using SimpleSurveys.Client.Utils;
 
 namespace SimpleSurveys.Client.Components
 {
-    public partial class Text
+    public partial class Text : ComponentBase
     {
         [Parameter]
         public SimpleSurveys.Shared.Models.Text TextItem { get; set; }
