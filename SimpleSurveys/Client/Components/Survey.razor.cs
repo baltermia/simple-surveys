@@ -20,7 +20,7 @@ namespace SimpleSurveys.Client.Components
         [Parameter]
         public EventCallback<SimpleSurveys.Shared.Models.SurveyResult> OnSubmitResult { get; set; }
 
-        private ushort? submissionsValue
+        private ushort? SubmissionsValue
         {
             get
             {
