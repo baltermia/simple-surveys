@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SimpleSurveys.Shared.Models
+namespace SimpleSurveys.Data.Models
 {
     public class Survey : EntityID
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleSurveys.Shared.Models
+namespace SimpleSurveys.Data.Models
 {
     public class Value : EntityID
     {

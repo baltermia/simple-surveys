@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Components
 {
     public partial class Text : ComponentBase
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.Text TextItem { get; set; }
+        public TextDto TextItem { get; set; }
 
         [Parameter]
         public Enums.Mode Mode { get; set; }

@@ -3,22 +3,23 @@ using SimpleSurveys.Client.Utils;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Components
 {
     public partial class Survey
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.Survey SurveyItem { get; set; } = new();
+        public SurveyDto SurveyItem { get; set; } = new();
 
         [Parameter]
         public Enums.Mode Mode { get; set; }
 
         [Parameter]
-        public EventCallback<SimpleSurveys.Shared.Models.Survey> OnSubmit { get; set; }
+        public EventCallback<SurveyDto> OnSubmit { get; set; }
 
         [Parameter]
-        public EventCallback<SimpleSurveys.Shared.Models.SurveyResult> OnSubmitResult { get; set; }
+        public EventCallback<SurveyResultDto> OnSubmitResult { get; set; }
 
         protected override void OnParametersSet()
         {
@@ -44,7 +45,7 @@ namespace SimpleSurveys.Client.Components
             }
         }
 
-        private void AddStep<T>() where T : SimpleSurveys.Shared.Models.Step, new()
+        private void AddStep<T>() where T : StepDto, new()
         {
             SurveyItem.Steps.Add(new T()
             {
@@ -54,15 +55,15 @@ namespace SimpleSurveys.Client.Components
             FixStepPositions();
         }
 
-        private void OnStepUp(SimpleSurveys.Shared.Models.Step step)
+        private void OnStepUp(StepDto step)
         {
             FixStepPositions();
 
             int current = step.Position;
 
-            SimpleSurveys.Shared.Models.Step down = SurveyItem.Steps.SingleOrDefault(s => s.Position == current - 1);
+            StepDto down = SurveyItem.Steps.SingleOrDefault(s => s.Position == current - 1);
 
-            if (down != default(SimpleSurveys.Shared.Models.Step))
+            if (down != default(StepDto))
             {
                 step.Position = down.Position;
 
@@ -70,15 +71,15 @@ namespace SimpleSurveys.Client.Components
             }
         }
 
-        private void OnStepDown(SimpleSurveys.Shared.Models.Step step)
+        private void OnStepDown(StepDto step)
         {
             FixStepPositions();
 
             int current = step.Position;
 
-            SimpleSurveys.Shared.Models.Step up = SurveyItem.Steps.SingleOrDefault(s => s.Position == current + 1);
+            StepDto up = SurveyItem.Steps.SingleOrDefault(s => s.Position == current + 1);
 
-            if (up != default(SimpleSurveys.Shared.Models.Step))
+            if (up != default(StepDto))
             {
                 step.Position = up.Position;
 
@@ -86,7 +87,7 @@ namespace SimpleSurveys.Client.Components
             }
         }
 
-        private void OnStepClose(SimpleSurveys.Shared.Models.Step step)
+        private void OnStepClose(StepDto step)
         {
             SurveyItem.Steps.Remove(step);
 
@@ -95,11 +96,11 @@ namespace SimpleSurveys.Client.Components
 
         private void FixStepPositions()
         {
-            List<SimpleSurveys.Shared.Models.Step> ordered = SurveyItem.Steps.OrderBy(s => s.Position).ToList();
+            List<StepDto> ordered = SurveyItem.Steps.OrderBy(s => s.Position).ToList();
 
             for (int i = 0; i < ordered.Count; i++)
             {
-                SimpleSurveys.Shared.Models.Step step = SurveyItem.Steps.Single(s => s == ordered.ElementAt(i));
+                StepDto step = SurveyItem.Steps.Single(s => s == ordered.ElementAt(i));
 
                 step.Position = i;
             }

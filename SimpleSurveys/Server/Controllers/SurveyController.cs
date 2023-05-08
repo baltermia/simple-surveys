@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSurveys.Server.Repositories;
-using SimpleSurveys.Shared.Models;
-using System;
+using SimpleSurveys.Data.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimpleSurveys.Server.Controllers

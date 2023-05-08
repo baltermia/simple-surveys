@@ -5,9 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleSurveys.Server.Repositories;
-using SimpleSurveys.Shared.Models;
 using Newtonsoft.Json;
-using SimpleSurveys.Shared.Configuration;
+using SimpleSurveys.Data.Configuration;
 
 namespace SimpleSurveys.Server
 {
@@ -25,7 +24,7 @@ namespace SimpleSurveys.Server
         public void ConfigureServices(IServiceCollection services)
         {
             // DB Context
-            services.AddDbContext<SimpleSurveysContext>(options => options/*.UseLazyLoadingProxies()*/.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SimpleSurveysContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Repository Wrapper
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

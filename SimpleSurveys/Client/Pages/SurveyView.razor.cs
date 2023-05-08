@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using SimpleSurveys.Shared.Models;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Pages
 {
@@ -14,15 +14,15 @@ namespace SimpleSurveys.Client.Pages
         [Parameter]
         public int Id { get; set; }
 
-        private Survey SurveyItem { get; set; } = new();
+        private SurveyDto SurveyItem { get; set; } = new();
 
         protected async override Task OnParametersSetAsync()
         {
-            SurveyItem = await Http.GetFromJsonAsync<Survey>("api/" + Id);
+            SurveyItem = await Http.GetFromJsonAsync<SurveyDto>("api/" + Id);
 
             await base.OnParametersSetAsync();
         }
-        private void OnSubmit(SurveyResult result)
+        private void OnSubmit(SurveyResultDto result)
         {
 
         }

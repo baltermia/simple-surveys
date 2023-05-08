@@ -1,4 +1,4 @@
-﻿namespace SimpleSurveys.Shared.Models
+﻿namespace SimpleSurveys.Data.Models
 {
     public abstract class EntityID
     {

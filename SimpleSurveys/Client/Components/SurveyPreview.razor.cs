@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Components
 {
     public partial class SurveyPreview
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.Survey SurveyItem { get; set; }
+        public SurveyDto SurveyItem { get; set; }
     }
 }

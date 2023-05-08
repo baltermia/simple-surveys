@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SimpleSurveys.Shared.Models
+namespace SimpleSurveys.Data.Models
 {
     /// <summary>
     /// Holds the results data of a survey

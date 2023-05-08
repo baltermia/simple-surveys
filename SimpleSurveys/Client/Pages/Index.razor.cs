@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SimpleSurveys.Shared.Models;
+using SimpleSurveys.Shared.DataTransferObjects;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -12,11 +12,11 @@ namespace SimpleSurveys.Client.Pages
         [Inject]
         public HttpClient Http { get; set; }
 
-        private List<Survey> Surveys;
+        private List<SurveyDto> Surveys;
 
         protected async override Task OnInitializedAsync()
         {
-            Surveys = await Http.GetFromJsonAsync<List<Survey>>("api");
+            Surveys = await Http.GetFromJsonAsync<List<SurveyDto>>("api");
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Components
 {
     public partial class Number
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.Number NumberItem { get; set; }
+        public NumberDto NumberItem { get; set; }
 
         [Parameter]
         public Enums.Mode Mode { get; set; }

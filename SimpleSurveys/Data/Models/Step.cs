@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleSurveys.Shared.Models
+namespace SimpleSurveys.Data.Models
 {
     /// <summary>
     /// The main Step class

@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SimpleSurveys.Shared.Configuration;
+using SimpleSurveys.Data.Configuration;
 
-namespace SimpleSurveys.Shared.Migrations
+namespace SimpleSurveys.Data.Migrations
 {
     [DbContext(typeof(SimpleSurveysContext))]
-    [Migration("20211104081628_Initial")]
-    partial class Initial
+    partial class SimpleSurveysContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +94,7 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("RadioValue");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Step", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Step", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -130,7 +128,7 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Step");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.StepResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.StepResult", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -159,7 +157,7 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("StepResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Survey", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Survey", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -199,7 +197,7 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("Surveys");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.SurveyResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.SurveyResult", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -222,7 +220,7 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("SurveyResults");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Value", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Value", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -238,16 +236,16 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("Values");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Check", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Check", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.HasDiscriminator().HasValue("Check");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Date", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Date", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<DateTime?>("Default")
                         .HasColumnType("datetime2")
@@ -264,9 +262,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("Date");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.DropDown", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.DropDown", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<int?>("Default")
                         .ValueGeneratedOnUpdateSometimes()
@@ -284,9 +282,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("DropDown");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Number", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Number", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<int?>("Default")
                         .ValueGeneratedOnUpdateSometimes()
@@ -301,16 +299,16 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("Number");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Radio", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Radio", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.HasDiscriminator().HasValue("Radio");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Range", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Range", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<int>("Max")
                         .HasColumnType("int");
@@ -321,9 +319,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("Range");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Text", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Text", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<string>("Placeholder")
                         .HasColumnType("nvarchar(max)")
@@ -332,23 +330,23 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("Text");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.YesNo", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.YesNo", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.HasDiscriminator().HasValue("YesNo");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.CheckResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.CheckResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.HasDiscriminator().HasValue("CheckResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.DateResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.DateResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<DateTime>("Value")
                         .HasColumnType("datetime2")
@@ -357,16 +355,16 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("DateResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.DropDownResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.DropDownResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.HasDiscriminator().HasValue("DropDownResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.NumberResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.NumberResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<int>("Value")
                         .ValueGeneratedOnUpdateSometimes()
@@ -376,9 +374,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("NumberResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RadioResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RadioResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<int>("ValueID")
                         .HasColumnType("int");
@@ -388,9 +386,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("RadioResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RangeResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RangeResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<int>("Value")
                         .ValueGeneratedOnUpdateSometimes()
@@ -400,9 +398,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("RangeResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RateResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RateResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -413,9 +411,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("RateResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.TextResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.TextResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -426,9 +424,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.HasDiscriminator().HasValue("TextResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.YesNoResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.YesNoResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<bool>("Value")
                         .HasColumnType("bit")
@@ -439,13 +437,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("CheckResultValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.CheckResult", null)
+                    b.HasOne("SimpleSurveys.Data.Models.CheckResult", null)
                         .WithMany()
                         .HasForeignKey("CheckResultsID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -454,13 +452,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("CheckValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Check", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Check", null)
                         .WithMany()
                         .HasForeignKey("ChecksID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -469,13 +467,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("DropDownResultValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.DropDownResult", null)
+                    b.HasOne("SimpleSurveys.Data.Models.DropDownResult", null)
                         .WithMany()
                         .HasForeignKey("DropDownResultsID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -484,13 +482,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("DropDownValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.DropDown", null)
+                    b.HasOne("SimpleSurveys.Data.Models.DropDown", null)
                         .WithMany()
                         .HasForeignKey("DropDownsID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -499,22 +497,22 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("RadioValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Radio", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Radio", null)
                         .WithMany()
                         .HasForeignKey("RadiosID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Step", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Step", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Survey", "Survey")
+                    b.HasOne("SimpleSurveys.Data.Models.Survey", "Survey")
                         .WithMany("Steps")
                         .HasForeignKey("SurveyID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -523,15 +521,15 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("Survey");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.StepResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.StepResult", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Step", "Step")
+                    b.HasOne("SimpleSurveys.Data.Models.Step", "Step")
                         .WithMany("Results")
                         .HasForeignKey("StepID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.SurveyResult", "SurveyResult")
+                    b.HasOne("SimpleSurveys.Data.Models.SurveyResult", "SurveyResult")
                         .WithMany("StepResults")
                         .HasForeignKey("SurveyResultID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -542,9 +540,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("SurveyResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.SurveyResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.SurveyResult", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Survey", "Survey")
+                    b.HasOne("SimpleSurveys.Data.Models.Survey", "Survey")
                         .WithMany("SurveyResults")
                         .HasForeignKey("SurveyID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -553,9 +551,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("Survey");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RadioResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RadioResult", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", "Value")
+                    b.HasOne("SimpleSurveys.Data.Models.Value", "Value")
                         .WithMany("RadioResults")
                         .HasForeignKey("ValueID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -564,24 +562,24 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("Value");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Step", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Step", b =>
                 {
                     b.Navigation("Results");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Survey", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Survey", b =>
                 {
                     b.Navigation("Steps");
 
                     b.Navigation("SurveyResults");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.SurveyResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.SurveyResult", b =>
                 {
                     b.Navigation("StepResults");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Value", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Value", b =>
                 {
                     b.Navigation("RadioResults");
                 });
