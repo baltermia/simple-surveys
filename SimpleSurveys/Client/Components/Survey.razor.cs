@@ -20,18 +20,6 @@ namespace SimpleSurveys.Client.Components
         [Parameter]
         public EventCallback<SimpleSurveys.Shared.Models.SurveyResult> OnSubmitResult { get; set; }
 
-        private ushort? SubmissionsValue
-        {
-            get
-            {
-                return (ushort?)SurveyItem.MaxSubmissions;
-            }
-            set
-            {
-                SurveyItem.MaxSubmissions = value;
-            }
-        }
-
         protected override void OnParametersSet()
         {
             if (Mode == Enums.Mode.Create)
