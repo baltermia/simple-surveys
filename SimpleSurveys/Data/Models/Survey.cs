@@ -22,13 +22,11 @@ namespace SimpleSurveys.Data.Models
         /// <summary>
         /// When the Survey was created
         /// </summary>
-        [Column(TypeName = "datetime"), Editable(false, AllowInitialValue = true)]
         public virtual DateTime Created { get; set; } = DateTime.Now;
 
         /// <summary>
         /// When the survey got edited the last time (not including initialization)
         /// </summary>
-        [Column(TypeName = "datetime")]
         public virtual DateTime? Updated { get; set; } = null;
 
         /// <summary>

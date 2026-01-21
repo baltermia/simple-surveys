@@ -11,11 +11,11 @@
     case Enums.Mode.Create:
         <Form Model="RangeItem">
             <FormItem Label="Minimum Value">
-                <Input TValue="int" Type="number" @bind-Value="@context.Min" />
+                <Input TValue="int" Type="InputType.Number" @bind-Value="@context.Min" />
             </FormItem>
 
             <FormItem Label="Maximum Value">
-                <Input TValue="int" Type="number" @bind-Value="@context.Max" />
+                <Input TValue="int" Type="InputType.Number" @bind-Value="@context.Max" />
             </FormItem>
         </Form>
         break;

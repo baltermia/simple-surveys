@@ -15,8 +15,8 @@ namespace SimpleSurveys.Client.Components
 
         public bool? Result { get; private set; } = null;
 
-        private string yesType = ButtonType.Default;
-        private string noType = ButtonType.Default;
+        private ButtonType yesType = ButtonType.Default;
+        private ButtonType noType = ButtonType.Default;
 
         protected override void OnParametersSet()
         {

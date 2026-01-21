@@ -24,13 +24,24 @@ namespace SimpleSurveys.Server
         public void ConfigureServices(IServiceCollection services)
         {
             // DB Context
-            services.AddDbContext<SimpleSurveysContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SimpleSurveysContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             // Repository Wrapper
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
+            
+            services.AddCors(options =>  
+            {  
+                options.AddPolicy("AllowBlazorOrigin", policy =>  
+                {  
+                    // Replace with your Blazor app's origin (e.g., http://localhost:5000)  
+                    policy.WithOrigins("http://localhost:5002")  
+                        .AllowAnyHeader() // Allows headers like Content-Type  
+                        .AllowAnyMethod(); // Allows HTTP methods (GET, POST, etc.)  
+                });  
+            });  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +70,9 @@ namespace SimpleSurveys.Server
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowBlazorOrigin");  
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

@@ -2,9 +2,11 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SimpleSurveys.Data.Configuration;
+
+#nullable disable
 
 namespace SimpleSurveys.Data.Migrations
 {
@@ -15,17 +17,18 @@ namespace SimpleSurveys.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("CheckResultValue", b =>
                 {
                     b.Property<int>("CheckResultsID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("CheckResultsID", "ValuesID");
 
@@ -37,10 +40,10 @@ namespace SimpleSurveys.Data.Migrations
             modelBuilder.Entity("CheckValue", b =>
                 {
                     b.Property<int>("ChecksID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("ChecksID", "ValuesID");
 
@@ -52,10 +55,10 @@ namespace SimpleSurveys.Data.Migrations
             modelBuilder.Entity("DropDownResultValue", b =>
                 {
                     b.Property<int>("DropDownResultsID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("DropDownResultsID", "ValuesID");
 
@@ -67,10 +70,10 @@ namespace SimpleSurveys.Data.Migrations
             modelBuilder.Entity("DropDownValue", b =>
                 {
                     b.Property<int>("DropDownsID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("DropDownsID", "ValuesID");
 
@@ -82,10 +85,10 @@ namespace SimpleSurveys.Data.Migrations
             modelBuilder.Entity("RadioValue", b =>
                 {
                     b.Property<int>("RadiosID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("RadiosID", "ValuesID");
 
@@ -98,26 +101,27 @@ namespace SimpleSurveys.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("Position")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<bool>("Required")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<int>("SurveyID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -126,25 +130,28 @@ namespace SimpleSurveys.Data.Migrations
                     b.ToTable("Steps");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Step");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("SimpleSurveys.Data.Models.StepResult", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("StepID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("SurveyResultID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -155,42 +162,45 @@ namespace SimpleSurveys.Data.Migrations
                     b.ToTable("StepResults");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("StepResult");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("SimpleSurveys.Data.Models.Survey", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<DateTime?>("ClosedSince")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("datetime");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("MaxSubmissions")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<bool>("Open")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("Public")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ID");
 
@@ -201,17 +211,18 @@ namespace SimpleSurveys.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Submitted")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("SurveyID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -224,12 +235,13 @@ namespace SimpleSurveys.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -248,16 +260,22 @@ namespace SimpleSurveys.Data.Migrations
                     b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<DateTime?>("Default")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("Date_Default");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Placeholder")
-                        .HasColumnType("nvarchar(max)")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("DateType");
+
+                    b.ToTable("Steps", t =>
+                        {
+                            t.Property("Default")
+                                .HasColumnName("Date_Default");
+                        });
 
                     b.HasDiscriminator().HasValue("Date");
                 });
@@ -268,15 +286,15 @@ namespace SimpleSurveys.Data.Migrations
 
                     b.Property<int?>("Default")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Default");
 
                     b.Property<bool>("MultiSelect")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Placeholder")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.HasDiscriminator().HasValue("DropDown");
@@ -288,12 +306,12 @@ namespace SimpleSurveys.Data.Migrations
 
                     b.Property<int?>("Default")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Default");
 
                     b.Property<string>("Placeholder")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.HasDiscriminator().HasValue("Number");
@@ -311,10 +329,10 @@ namespace SimpleSurveys.Data.Migrations
                     b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<int>("Max")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Min")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasDiscriminator().HasValue("Range");
                 });
@@ -324,7 +342,8 @@ namespace SimpleSurveys.Data.Migrations
                     b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<string>("Placeholder")
-                        .HasColumnType("nvarchar(max)")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.HasDiscriminator().HasValue("Text");
@@ -349,7 +368,7 @@ namespace SimpleSurveys.Data.Migrations
                     b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<DateTime>("Value")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("DateTime_Value");
 
                     b.HasDiscriminator().HasValue("DateResult");
@@ -368,7 +387,7 @@ namespace SimpleSurveys.Data.Migrations
 
                     b.Property<int>("Value")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Int_Value");
 
                     b.HasDiscriminator().HasValue("NumberResult");
@@ -379,7 +398,7 @@ namespace SimpleSurveys.Data.Migrations
                     b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<int>("ValueID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasIndex("ValueID");
 
@@ -392,7 +411,7 @@ namespace SimpleSurveys.Data.Migrations
 
                     b.Property<int>("Value")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Int_Value");
 
                     b.HasDiscriminator().HasValue("RangeResult");
@@ -405,7 +424,7 @@ namespace SimpleSurveys.Data.Migrations
                     b.Property<string>("Value")
                         .IsRequired()
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("String_Value");
 
                     b.HasDiscriminator().HasValue("RateResult");
@@ -418,7 +437,7 @@ namespace SimpleSurveys.Data.Migrations
                     b.Property<string>("Value")
                         .IsRequired()
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("String_Value");
 
                     b.HasDiscriminator().HasValue("TextResult");
@@ -429,7 +448,7 @@ namespace SimpleSurveys.Data.Migrations
                     b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<bool>("Value")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("Bool_Value");
 
                     b.HasDiscriminator().HasValue("YesNoResult");

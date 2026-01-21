@@ -3,6 +3,32 @@
   A easy-to-use web app where you can create and participate in surveys.
 </div>
 
+# Development
+
+## Adding Migrations
+
+To add migrations, head into the `\SimpleSurveys\Server` directory in a command prompt or powershell window and execute the following command:
+
+```sh
+dotnet ef migrations add <Name> --project ../Data 
+```
+
+## Database Container
+
+You can easily spin up a PostgreSQL DB with the `docker-compose.yml` file. Just run the following command in the root directory:
+
+```sh
+docker-compose up -d
+```
+
+`appsettings.Development.json` is already configured to connect to the container.
+
+
+---
+
+# OLD - MIGHT GET DELETED SOON
+
+
 ## Installation
 ### .NET SDK
 #### Check Installed Versions

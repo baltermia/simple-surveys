@@ -1,4 +1,5 @@
-﻿@using DatePickerType = SimpleSurveys.Shared.DataTransferObjects.DatePickerType 
+﻿@using SimpleSurveys.Client.Extensions
+@using DatePickerType = SimpleSurveys.Shared.DataTransferObjects.DatePickerType 
 
 @switch (Mode)
 {
@@ -9,7 +10,7 @@
         }
         else
         {
-            <DatePicker TValue="DateTime?" @bind-Value="DateValue" Placeholder="@(DateItem.Placeholder ?? "")" Picker="@DateItem.Type.ToString().ToLower()" />
+            <DatePicker TValue="DateTime?" @bind-Value="DateValue" Placeholder="@(DateItem.Placeholder ?? "")" Picker="@DateItem.Type.ToAntDesignDatePickerType()" />
         }
         break;
 
@@ -41,7 +42,7 @@
                 }
                 else
                 {
-                    <DatePicker TValue="DateTime?" Picker="@(context?.Type.ToString().ToLower() ?? "date")" @bind-Value="context.Default" />
+                    <DatePicker TValue="DateTime?" Picker="@(context?.Type.ToAntDesignDatePickerType() ?? default)" @bind-Value="context.Default" />
                 }
             </FormItem>
         </Form>
