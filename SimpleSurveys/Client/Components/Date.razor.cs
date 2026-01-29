@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
-using SimpleSurveys.Shared.Models;
+using SimpleSurveys.Shared.DataTransferObjects;
 using System;
 
 namespace SimpleSurveys.Client.Components
@@ -8,7 +8,7 @@ namespace SimpleSurveys.Client.Components
     public partial class Date
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.Date DateItem { get; set; }
+        public DateDto DateItem { get; set; }
 
         [Parameter]
         public Enums.Mode Mode { get; set; }

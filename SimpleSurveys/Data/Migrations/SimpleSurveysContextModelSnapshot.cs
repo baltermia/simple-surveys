@@ -2,11 +2,13 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SimpleSurveys.Shared.Configuration;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using SimpleSurveys.Data.Configuration;
 
-namespace SimpleSurveys.Shared.Migrations
+#nullable disable
+
+namespace SimpleSurveys.Data.Migrations
 {
     [DbContext(typeof(SimpleSurveysContext))]
     partial class SimpleSurveysContextModelSnapshot : ModelSnapshot
@@ -15,17 +17,18 @@ namespace SimpleSurveys.Shared.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("CheckResultValue", b =>
                 {
                     b.Property<int>("CheckResultsID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("CheckResultsID", "ValuesID");
 
@@ -37,10 +40,10 @@ namespace SimpleSurveys.Shared.Migrations
             modelBuilder.Entity("CheckValue", b =>
                 {
                     b.Property<int>("ChecksID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("ChecksID", "ValuesID");
 
@@ -52,10 +55,10 @@ namespace SimpleSurveys.Shared.Migrations
             modelBuilder.Entity("DropDownResultValue", b =>
                 {
                     b.Property<int>("DropDownResultsID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("DropDownResultsID", "ValuesID");
 
@@ -67,10 +70,10 @@ namespace SimpleSurveys.Shared.Migrations
             modelBuilder.Entity("DropDownValue", b =>
                 {
                     b.Property<int>("DropDownsID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("DropDownsID", "ValuesID");
 
@@ -82,10 +85,10 @@ namespace SimpleSurveys.Shared.Migrations
             modelBuilder.Entity("RadioValue", b =>
                 {
                     b.Property<int>("RadiosID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ValuesID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("RadiosID", "ValuesID");
 
@@ -94,30 +97,31 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("RadioValue");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Step", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Step", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("Position")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<bool>("Required")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<int>("SurveyID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -126,25 +130,28 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("Steps");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Step");
+
+                    b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.StepResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.StepResult", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("StepID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("SurveyResultID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -155,63 +162,67 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("StepResults");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("StepResult");
+
+                    b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Survey", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Survey", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<DateTime?>("ClosedSince")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("datetime");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("MaxSubmissions")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<bool>("Open")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("Public")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ID");
 
                     b.ToTable("Surveys");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.SurveyResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.SurveyResult", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Submitted")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("SurveyID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -220,216 +231,224 @@ namespace SimpleSurveys.Shared.Migrations
                     b.ToTable("SurveyResults");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Value", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Value", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
                     b.ToTable("Values");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Check", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Check", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.HasDiscriminator().HasValue("Check");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Date", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Date", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<DateTime?>("Default")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("Date_Default");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Placeholder")
-                        .HasColumnType("nvarchar(max)")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.Property<int>("Type")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("DateType");
+
+                    b.ToTable("Steps", t =>
+                        {
+                            t.Property("Default")
+                                .HasColumnName("Date_Default");
+                        });
 
                     b.HasDiscriminator().HasValue("Date");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.DropDown", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.DropDown", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<int?>("Default")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Default");
 
                     b.Property<bool>("MultiSelect")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Placeholder")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.HasDiscriminator().HasValue("DropDown");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Number", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Number", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<int?>("Default")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Default");
 
                     b.Property<string>("Placeholder")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.HasDiscriminator().HasValue("Number");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Radio", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Radio", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.HasDiscriminator().HasValue("Radio");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Range", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Range", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<int>("Max")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Min")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasDiscriminator().HasValue("Range");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Text", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Text", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.Property<string>("Placeholder")
-                        .HasColumnType("nvarchar(max)")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("text")
                         .HasColumnName("Placeholder");
 
                     b.HasDiscriminator().HasValue("Text");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.YesNo", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.YesNo", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.Step");
+                    b.HasBaseType("SimpleSurveys.Data.Models.Step");
 
                     b.HasDiscriminator().HasValue("YesNo");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.CheckResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.CheckResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.HasDiscriminator().HasValue("CheckResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.DateResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.DateResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<DateTime>("Value")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("DateTime_Value");
 
                     b.HasDiscriminator().HasValue("DateResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.DropDownResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.DropDownResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.HasDiscriminator().HasValue("DropDownResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.NumberResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.NumberResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<int>("Value")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Int_Value");
 
                     b.HasDiscriminator().HasValue("NumberResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RadioResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RadioResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<int>("ValueID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasIndex("ValueID");
 
                     b.HasDiscriminator().HasValue("RadioResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RangeResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RangeResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<int>("Value")
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Int_Value");
 
                     b.HasDiscriminator().HasValue("RangeResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RateResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RateResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<string>("Value")
                         .IsRequired()
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("String_Value");
 
                     b.HasDiscriminator().HasValue("RateResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.TextResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.TextResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<string>("Value")
                         .IsRequired()
                         .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("String_Value");
 
                     b.HasDiscriminator().HasValue("TextResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.YesNoResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.YesNoResult", b =>
                 {
-                    b.HasBaseType("SimpleSurveys.Shared.Models.StepResult");
+                    b.HasBaseType("SimpleSurveys.Data.Models.StepResult");
 
                     b.Property<bool>("Value")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("Bool_Value");
 
                     b.HasDiscriminator().HasValue("YesNoResult");
@@ -437,13 +456,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("CheckResultValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.CheckResult", null)
+                    b.HasOne("SimpleSurveys.Data.Models.CheckResult", null)
                         .WithMany()
                         .HasForeignKey("CheckResultsID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -452,13 +471,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("CheckValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Check", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Check", null)
                         .WithMany()
                         .HasForeignKey("ChecksID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -467,13 +486,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("DropDownResultValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.DropDownResult", null)
+                    b.HasOne("SimpleSurveys.Data.Models.DropDownResult", null)
                         .WithMany()
                         .HasForeignKey("DropDownResultsID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -482,13 +501,13 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("DropDownValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.DropDown", null)
+                    b.HasOne("SimpleSurveys.Data.Models.DropDown", null)
                         .WithMany()
                         .HasForeignKey("DropDownsID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -497,22 +516,22 @@ namespace SimpleSurveys.Shared.Migrations
 
             modelBuilder.Entity("RadioValue", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Radio", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Radio", null)
                         .WithMany()
                         .HasForeignKey("RadiosID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", null)
+                    b.HasOne("SimpleSurveys.Data.Models.Value", null)
                         .WithMany()
                         .HasForeignKey("ValuesID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Step", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Step", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Survey", "Survey")
+                    b.HasOne("SimpleSurveys.Data.Models.Survey", "Survey")
                         .WithMany("Steps")
                         .HasForeignKey("SurveyID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -521,15 +540,15 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("Survey");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.StepResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.StepResult", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Step", "Step")
+                    b.HasOne("SimpleSurveys.Data.Models.Step", "Step")
                         .WithMany("Results")
                         .HasForeignKey("StepID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SimpleSurveys.Shared.Models.SurveyResult", "SurveyResult")
+                    b.HasOne("SimpleSurveys.Data.Models.SurveyResult", "SurveyResult")
                         .WithMany("StepResults")
                         .HasForeignKey("SurveyResultID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -540,9 +559,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("SurveyResult");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.SurveyResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.SurveyResult", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Survey", "Survey")
+                    b.HasOne("SimpleSurveys.Data.Models.Survey", "Survey")
                         .WithMany("SurveyResults")
                         .HasForeignKey("SurveyID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -551,9 +570,9 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("Survey");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.RadioResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.RadioResult", b =>
                 {
-                    b.HasOne("SimpleSurveys.Shared.Models.Value", "Value")
+                    b.HasOne("SimpleSurveys.Data.Models.Value", "Value")
                         .WithMany("RadioResults")
                         .HasForeignKey("ValueID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -562,24 +581,24 @@ namespace SimpleSurveys.Shared.Migrations
                     b.Navigation("Value");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Step", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Step", b =>
                 {
                     b.Navigation("Results");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Survey", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Survey", b =>
                 {
                     b.Navigation("Steps");
 
                     b.Navigation("SurveyResults");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.SurveyResult", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.SurveyResult", b =>
                 {
                     b.Navigation("StepResults");
                 });
 
-            modelBuilder.Entity("SimpleSurveys.Shared.Models.Value", b =>
+            modelBuilder.Entity("SimpleSurveys.Data.Models.Value", b =>
                 {
                     b.Navigation("RadioResults");
                 });

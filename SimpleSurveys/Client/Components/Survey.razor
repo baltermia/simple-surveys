@@ -78,7 +78,7 @@
 
     <p class="description">@SurveyItem.Description</p>
 
-    @foreach (SimpleSurveys.Shared.Models.Step step in SurveyItem.Steps.OrderBy(s => s.Position))
+    @foreach (StepDto step in SurveyItem.Steps.OrderBy(s => s.Position))
     {
         <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" />
     }
@@ -137,7 +137,7 @@ else
         </div>
 
         <div>
-            @foreach (SimpleSurveys.Shared.Models.Step step in SurveyItem.Steps.OrderBy(s => s.Position))
+            @foreach (StepDto step in SurveyItem.Steps.OrderBy(s => s.Position))
             {
                 <SimpleSurveys.Client.Components.Step StepItem="@step" Mode="@Mode" OnUp="OnStepUp" OnDown="OnStepDown" OnClose="OnStepClose" />
             }
@@ -148,15 +148,15 @@ else
                 <Dropdown BoundaryAdjustMode="@TriggerBoundaryAdjustMode.InView">
                     <Overlay>
                         <Menu>
-                            <MenuItem Icon="@IconType.Outline.FileText" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Text>())">Text</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.Number" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Number>())">Number</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.CheckSquare" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Check>())">Check</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.CheckCircle" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Radio>())">Radio</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.ColumnWidth" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Range>())">Range</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.Star" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Rate>())">Rate</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.Calendar" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.Date>())">Date</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.UnorderedList" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.DropDown>())">DropDown</MenuItem>
-                            <MenuItem Icon="@IconType.Outline.Control" @onclick="@(() => AddStep<SimpleSurveys.Shared.Models.YesNo>())">Yes/No</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.FileText" @onclick="@(() => AddStep<TextDto>())">Text</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Number" @onclick="@(() => AddStep<NumberDto>())">Number</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.CheckSquare" @onclick="@(() => AddStep<CheckDto>())">Check</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.CheckCircle" @onclick="@(() => AddStep<RadioDto>())">Radio</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.ColumnWidth" @onclick="@(() => AddStep<RangeDto>())">Range</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Star" @onclick="@(() => AddStep<RateDto>())">Rate</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Calendar" @onclick="@(() => AddStep<DateDto>())">Date</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.UnorderedList" @onclick="@(() => AddStep<DropDownDto>())">DropDown</MenuItem>
+                            <MenuItem Icon="@IconType.Outline.Control" @onclick="@(() => AddStep<YesNoDto>())">Yes/No</MenuItem>
                         </Menu>
                     </Overlay>
                     <ChildContent>

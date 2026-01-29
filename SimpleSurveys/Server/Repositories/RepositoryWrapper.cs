@@ -1,5 +1,5 @@
-﻿using SimpleSurveys.Shared.Configuration;
-using SimpleSurveys.Shared.Models;
+﻿using SimpleSurveys.Data.Configuration;
+using SimpleSurveys.Data.Models;
 using System.Threading.Tasks;
 
 namespace SimpleSurveys.Server.Repositories

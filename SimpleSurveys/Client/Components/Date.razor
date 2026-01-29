@@ -1,15 +1,16 @@
-﻿@using DatePickerType = SimpleSurveys.Shared.Models.DatePickerType 
+﻿@using SimpleSurveys.Client.Extensions
+@using DatePickerType = SimpleSurveys.Shared.DataTransferObjects.DatePickerType 
 
 @switch (Mode)
 {
     case Enums.Mode.View:
-        @if (DateItem.Type == SimpleSurveys.Shared.Models.DatePickerType.DateTime)
+        @if (DateItem.Type == SimpleSurveys.Shared.DataTransferObjects.DatePickerType.DateTime)
         {
             <DatePicker TValue="DateTime?" ShowTime="true" @bind-Value="DateValue" Placeholder="@(DateItem.Placeholder ?? "")" />
         }
         else
         {
-            <DatePicker TValue="DateTime?" @bind-Value="DateValue" Placeholder="@(DateItem.Placeholder ?? "")" Picker="@DateItem.Type.ToString().ToLower()" />
+            <DatePicker TValue="DateTime?" @bind-Value="DateValue" Placeholder="@(DateItem.Placeholder ?? "")" Picker="@DateItem.Type.ToAntDesignDatePickerType()" />
         }
         break;
 
@@ -35,13 +36,13 @@
             </FormItem>
 
             <FormItem Label="Default Value">
-                @if (context.Type == SimpleSurveys.Shared.Models.DatePickerType.DateTime)
+                @if (context.Type == SimpleSurveys.Shared.DataTransferObjects.DatePickerType.DateTime)
                 {
                     <DatePicker TValue="DateTime?" ShowTime="true" @bind-Value="context.Default" />
                 }
                 else
                 {
-                    <DatePicker TValue="DateTime?" Picker="@(context?.Type.ToString().ToLower() ?? "date")" @bind-Value="context.Default" />
+                    <DatePicker TValue="DateTime?" Picker="@(context?.Type.ToAntDesignDatePickerType() ?? default)" @bind-Value="context.Default" />
                 }
             </FormItem>
         </Form>

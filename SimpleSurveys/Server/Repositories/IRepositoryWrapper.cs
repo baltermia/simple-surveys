@@ -1,4 +1,4 @@
-﻿using SimpleSurveys.Shared.Models;
+﻿using SimpleSurveys.Data.Models;
 using System.Threading.Tasks;
 
 namespace SimpleSurveys.Server.Repositories

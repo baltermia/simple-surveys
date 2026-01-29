@@ -2,8 +2,8 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using SimpleSurveys.Shared.Models;
-using SimpleSurveys.Shared.Configuration;
+using SimpleSurveys.Data.Models;
+using SimpleSurveys.Data.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

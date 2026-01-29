@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -22,41 +22,41 @@ namespace SimpleSurveys.Shared.DataTransferObjects
         public virtual SurveyDto Survey { get; set; }
     }
     
-    public class Radio : StepDto
+    public class RadioDto : StepDto
     {
         public virtual ICollection<ValueDto> Values { get; set; } = new HashSet<ValueDto>();
 
-        public Radio()
+        public RadioDto()
         {
             Values = new HashSet<ValueDto>();
         }
     }
 
-    public class Range : StepDto
+    public class RangeDto : StepDto
     {
         public int Min { get; set; } = 0;
 
         public int Max { get; set; } = 10;
     }
 
-    public class Text : StepDto
+    public class TextDto : StepDto
     {
         public string Placeholder { get; set; } = null;
     }
 
-    public class Check : StepDto
+    public class CheckDto : StepDto
     {
         public virtual ICollection<ValueDto> Values { get; set; }
 
-        public Check()
+        public CheckDto()
         {
             Values = new HashSet<ValueDto>();
         }
     }
 
-    public class YesNo : StepDto {  }
+    public class YesNoDto : StepDto {  }
 
-    public class Date : StepDto
+    public class DateDto : StepDto
     {
         public string Placeholder { get; set; } = null;
 
@@ -65,19 +65,19 @@ namespace SimpleSurveys.Shared.DataTransferObjects
         public virtual DatePickerType Type { get; set; }
     }
 
-    public class Number : StepDto
+    public class NumberDto : StepDto
     {
         public string Placeholder { get; set; } = null;
 
         public int? Default { get; set; } = null;
     }
 
-    public class Rate : StepDto
+    public class RateDto : StepDto
     {
         public bool AllowHalf { get; set; } = false;
     }
 
-    public class DropDown : StepDto
+    public class DropDownDto : StepDto
     {
         public virtual ICollection<ValueDto> Values { get; set; }
 
@@ -87,7 +87,7 @@ namespace SimpleSurveys.Shared.DataTransferObjects
 
         public bool MultiSelect { get; set; } = false;
 
-        public DropDown()
+        public DropDownDto()
         {
             Values = new HashSet<ValueDto>();
         }

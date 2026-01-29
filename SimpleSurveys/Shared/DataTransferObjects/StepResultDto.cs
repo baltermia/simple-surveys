@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace SimpleSurveys.Shared.DataTransferObjects
@@ -14,58 +14,58 @@ namespace SimpleSurveys.Shared.DataTransferObjects
         public virtual SurveyResultDto SurveyResult { get; set; }
     }
 
-    public class RadioResult : StepResultDto
+    public class RadioResultDto : StepResultDto
     {
         public int ValueID { get; set; }
 
         public virtual ValueDto Value { get; set; }
     }
 
-    public class RangeResult : StepResultDto
+    public class RangeResultDto : StepResultDto
     {
         public int Value { get; set; }
     }
 
-    public class TextResult : StepResultDto
+    public class TextResultDto : StepResultDto
     {
         public string Value { get; set; }
     }
 
-    public class CheckResult : StepResultDto
+    public class CheckResultDto : StepResultDto
     {
         public virtual ICollection<ValueDto> Values { get; set; }
 
-        public CheckResult()
+        public CheckResultDto()
         {
             Values = new HashSet<ValueDto>();
         }
     }
 
-    public class YesNoResult : StepResultDto
+    public class YesNoResultDto : StepResultDto
     {
         public bool Value { get; set; }
     }
 
-    public class DateResult : StepResultDto
+    public class DateResultDto : StepResultDto
     {
         public virtual DateTime Value { get; set; }
     }
 
-    public class NumberResult : StepResultDto
+    public class NumberResultDto : StepResultDto
     {
         public int Value { get; set; }
     }
 
-    public class RateResult : StepResultDto
+    public class RateResultDto : StepResultDto
     {
         public string Value { get; set; }
     }
 
-    public class DropDownResult : StepResultDto
+    public class DropDownResultDto : StepResultDto
     {
         public virtual ICollection<ValueDto> Values { get; set; }
 
-        public DropDownResult()
+        public DropDownResultDto()
         {
             Values = new HashSet<ValueDto>();
         }

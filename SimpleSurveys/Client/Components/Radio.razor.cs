@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Components
 {
     public partial class Radio
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.Radio RadioItem { get; set; }
+        public RadioDto RadioItem { get; set; }
 
         [Parameter]
         public Enums.Mode Mode { get; set; }

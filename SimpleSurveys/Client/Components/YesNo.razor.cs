@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
 using AntDesign;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Components
 {
     public partial class YesNo
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.YesNo YesNoItem { get; set; }
+        public YesNoDto YesNoItem { get; set; }
 
         [Parameter]
         public Enums.Mode Mode { get; set; }
 
         public bool? Result { get; private set; } = null;
 
-        private string yesType = ButtonType.Default;
-        private string noType = ButtonType.Default;
+        private ButtonType yesType = ButtonType.Default;
+        private ButtonType noType = ButtonType.Default;
 
         protected override void OnParametersSet()
         {

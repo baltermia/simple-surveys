@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
-using SimpleSurveys.Shared.Models;
+using SimpleSurveys.Shared.DataTransferObjects;
 using System.Net.Http;
 
 namespace SimpleSurveys.Client.Pages
@@ -13,13 +13,13 @@ namespace SimpleSurveys.Client.Pages
         [Inject]
         public NavigationManager NavManager { get; set; }
 
-        private async void OnSubmit(Survey survey)
+        private async void OnSubmit(SurveyDto survey)
         {
             HttpResponseMessage result = await Http.PostBasicAsync("api", survey);
 
-            Survey created = await result.DeserializeResponse<Survey>();
+            SurveyDto created = await result.DeserializeResponse<SurveyDto>();
 
-            NavManager.NavigateTo("/view/" + created.ID);
+            NavManager.NavigateTo("/view/" + created.Id);
         }
     }
 }

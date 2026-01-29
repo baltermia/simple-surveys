@@ -17,7 +17,7 @@
 <p class="page-title">Welcome to SimpleSurveys! Select a Survey to get started.</p>
 
 <div class="grid-container">
-    @foreach (Survey survey in Surveys ?? new())
+    @foreach (SurveyDto survey in Surveys ?? new())
     {
         <div class="grid-item">
             <SimpleSurveys.Client.Components.SurveyPreview SurveyItem=@survey />

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleSurveys.Shared.Models
+namespace SimpleSurveys.Data.Models
 {
     /// <summary>
     /// Holds the results data of a step

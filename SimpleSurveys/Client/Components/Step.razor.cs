@@ -1,24 +1,25 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SimpleSurveys.Client.Utils;
+using SimpleSurveys.Shared.DataTransferObjects;
 
 namespace SimpleSurveys.Client.Components
 {
     public partial class Step
     {
         [Parameter]
-        public SimpleSurveys.Shared.Models.Step StepItem { get; set; }
+        public StepDto StepItem { get; set; }
 
         [Parameter]
         public Enums.Mode Mode { get; set; }
 
         [Parameter]
-        public EventCallback<SimpleSurveys.Shared.Models.Step> OnUp { get; set; }
+        public EventCallback<StepDto> OnUp { get; set; }
 
         [Parameter]
-        public EventCallback<SimpleSurveys.Shared.Models.Step> OnDown { get; set; }
+        public EventCallback<StepDto> OnDown { get; set; }
 
         [Parameter]
-        public EventCallback<SimpleSurveys.Shared.Models.Step> OnClose { get; set; }
+        public EventCallback<StepDto> OnClose { get; set; }
 
         private string StepIcon
         {

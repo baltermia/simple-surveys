@@ -1,27 +1,32 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace SimpleSurveys.Shared.Migrations
+#nullable disable
+
+namespace SimpleSurveys.Data.Migrations
 {
-    public partial class Initial : Migration
+    /// <inheritdoc />
+    public partial class Init : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "Surveys",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Updated = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Open = table.Column<bool>(type: "bit", nullable: false),
-                    ClosedSince = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MaxSubmissions = table.Column<int>(type: "int", nullable: true),
-                    Public = table.Column<bool>(type: "bit", nullable: false)
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Open = table.Column<bool>(type: "boolean", nullable: false),
+                    ClosedSince = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    MaxSubmissions = table.Column<int>(type: "integer", nullable: true),
+                    Public = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,9 +37,9 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "Values",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Text = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,20 +50,20 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "Steps",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurveyID = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Required = table.Column<bool>(type: "bit", nullable: false),
-                    Position = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Placeholder = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date_Default = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateType = table.Column<int>(type: "int", nullable: true),
-                    Default = table.Column<int>(type: "int", nullable: true),
-                    MultiSelect = table.Column<bool>(type: "bit", nullable: true),
-                    Min = table.Column<int>(type: "int", nullable: true),
-                    Max = table.Column<int>(type: "int", nullable: true)
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SurveyID = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Required = table.Column<bool>(type: "boolean", nullable: false),
+                    Position = table.Column<int>(type: "integer", nullable: false),
+                    Discriminator = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Placeholder = table.Column<string>(type: "text", nullable: true),
+                    Date_Default = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    DateType = table.Column<int>(type: "integer", nullable: true),
+                    Default = table.Column<int>(type: "integer", nullable: true),
+                    MultiSelect = table.Column<bool>(type: "boolean", nullable: true),
+                    Min = table.Column<int>(type: "integer", nullable: true),
+                    Max = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,11 +80,11 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "SurveyResults",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurveyID = table.Column<int>(type: "int", nullable: false),
-                    Submitted = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SurveyID = table.Column<int>(type: "integer", nullable: false),
+                    Submitted = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,8 +101,8 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "CheckValue",
                 columns: table => new
                 {
-                    ChecksID = table.Column<int>(type: "int", nullable: false),
-                    ValuesID = table.Column<int>(type: "int", nullable: false)
+                    ChecksID = table.Column<int>(type: "integer", nullable: false),
+                    ValuesID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,8 +125,8 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "DropDownValue",
                 columns: table => new
                 {
-                    DropDownsID = table.Column<int>(type: "int", nullable: false),
-                    ValuesID = table.Column<int>(type: "int", nullable: false)
+                    DropDownsID = table.Column<int>(type: "integer", nullable: false),
+                    ValuesID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,8 +149,8 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "RadioValue",
                 columns: table => new
                 {
-                    RadiosID = table.Column<int>(type: "int", nullable: false),
-                    ValuesID = table.Column<int>(type: "int", nullable: false)
+                    RadiosID = table.Column<int>(type: "integer", nullable: false),
+                    ValuesID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -168,16 +173,16 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "StepResults",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StepID = table.Column<int>(type: "int", nullable: false),
-                    SurveyResultID = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DateTime_Value = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Int_Value = table.Column<int>(type: "int", nullable: true),
-                    ValueID = table.Column<int>(type: "int", nullable: true),
-                    String_Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bool_Value = table.Column<bool>(type: "bit", nullable: true)
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StepID = table.Column<int>(type: "integer", nullable: false),
+                    SurveyResultID = table.Column<int>(type: "integer", nullable: false),
+                    Discriminator = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    DateTime_Value = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Int_Value = table.Column<int>(type: "integer", nullable: true),
+                    ValueID = table.Column<int>(type: "integer", nullable: true),
+                    String_Value = table.Column<string>(type: "text", nullable: true),
+                    Bool_Value = table.Column<bool>(type: "boolean", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,8 +211,8 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "CheckResultValue",
                 columns: table => new
                 {
-                    CheckResultsID = table.Column<int>(type: "int", nullable: false),
-                    ValuesID = table.Column<int>(type: "int", nullable: false)
+                    CheckResultsID = table.Column<int>(type: "integer", nullable: false),
+                    ValuesID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,8 +235,8 @@ namespace SimpleSurveys.Shared.Migrations
                 name: "DropDownResultValue",
                 columns: table => new
                 {
-                    DropDownResultsID = table.Column<int>(type: "int", nullable: false),
-                    ValuesID = table.Column<int>(type: "int", nullable: false)
+                    DropDownResultsID = table.Column<int>(type: "integer", nullable: false),
+                    ValuesID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -301,6 +306,7 @@ namespace SimpleSurveys.Shared.Migrations
                 column: "SurveyID");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

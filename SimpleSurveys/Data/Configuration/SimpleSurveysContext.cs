@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using SimpleSurveys.Shared.Models;
+using SimpleSurveys.Data.Models;
 using System.Linq;
 
-namespace SimpleSurveys.Shared.Configuration
+namespace SimpleSurveys.Data.Configuration
 {
     public class SimpleSurveysContext : DbContext
     {
