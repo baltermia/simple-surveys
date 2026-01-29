@@ -1,23 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSurveys.Server.Repositories;
 using SimpleSurveys.Data.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace SimpleSurveys.Server.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class SurveyController : Controller
+    public class SurveyController(IRepositoryWrapper wrapper, ILogger<SurveyController> logger) : Controller
     {
-        private readonly IRepositoryWrapper wrapper;
-
-        public SurveyController(IRepositoryWrapper wrapper)
-        {
-            this.wrapper = wrapper;
-        }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Survey>>> Get()
         {
@@ -62,8 +57,9 @@ namespace SimpleSurveys.Server.Controllers
 
                 return CreatedAtAction(nameof(Get), new { id = created.ID }, created);
             }
-            catch
+            catch (Exception ex)
             {
+                logger.LogError(ex, "Error: POST Survey");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error creating the entity in the database");
             }
         }

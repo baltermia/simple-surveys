@@ -61,9 +61,9 @@ namespace SimpleSurveys.Client.Components
 
             int current = step.Position;
 
-            StepDto down = SurveyItem.Steps.SingleOrDefault(s => s.Position == current - 1);
+            StepDto? down = SurveyItem.Steps.SingleOrDefault(s => s.Position == current - 1);
 
-            if (down != default(StepDto))
+            if (down != null)
             {
                 step.Position = down.Position;
 
@@ -77,9 +77,9 @@ namespace SimpleSurveys.Client.Components
 
             int current = step.Position;
 
-            StepDto up = SurveyItem.Steps.SingleOrDefault(s => s.Position == current + 1);
+            StepDto? up = SurveyItem.Steps.SingleOrDefault(s => s.Position == current + 1);
 
-            if (up != default(StepDto))
+            if (up != null)
             {
                 step.Position = up.Position;
 

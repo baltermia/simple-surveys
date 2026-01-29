@@ -10,6 +10,8 @@ using SimpleSurveys.Server.Repositories;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddLogging();
+
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             
 // DB Context

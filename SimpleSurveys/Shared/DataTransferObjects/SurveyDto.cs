@@ -12,7 +12,7 @@ namespace SimpleSurveys.Shared.DataTransferObjects
 
         public string Description { get; set; } = null;
 
-        public virtual DateTime Created { get; set; } = DateTime.Now;
+        public virtual DateTime Created { get; set; } = DateTime.UtcNow;
 
         public virtual DateTime? Updated { get; set; } = null;
 
